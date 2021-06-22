@@ -1,13 +1,14 @@
 const { client } = require("./index");
 
-function getAllProducts() {
+async function getAllProducts() {
   try {
-    const { rows: products } = client.query(
+    const { rows: products } = await client.query(
       /*sql*/
       ` SELECT *
         FROM products 
       `
     );
+    return products;
   } catch (error) {
     return error;
   }
