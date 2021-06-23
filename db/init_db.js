@@ -28,10 +28,8 @@ async function createTables() {
             console TEXT NOT NULL,
             description TEXT NOT NULL,
             price TEXT NOT NULL,
-            picture TEXT NOT NULL, /*FileID INT IDENTITY(1,1) NOT NULL,
-                                    Name NVARCHAR(50) NOT NULL,
-                                    Files VARBINARY(MAX) NOT NULL*/
-            reviews TEXT NOT NULL,
+            picture TEXT NOT NULL, 
+            reviews TEXT NOT NULL
           );
       `);
   } catch (error) {
@@ -70,7 +68,7 @@ async function createInitialProducts() {
         console: "PC",
         description: "Epic Games next project has you building forts and stopping a zombie invasion.",
         price: "70.00",
-        picture: "this is a placeholder for image",
+        picture: "this is a placeholder for image"
       },
     ];
     const products = await Promise.all(productsToCreate.map(createProduct));

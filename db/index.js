@@ -1,12 +1,7 @@
-// connect to DB
 
-const { Client } = require("pg");
 
-const DB_NAME = "gameStart";
-const DB_URL = process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
+module.exports = {
+...require("./createProduct"),
+...require("./client")
+}
 
-const client = new Client(DB_URL);
-
-// exports
-
-module.exports = { client };
