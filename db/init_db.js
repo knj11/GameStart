@@ -25,7 +25,7 @@ async function createTables() {
           CREATE TABLE products(
             id SERIAL PRIMARY KEY,
             title TEXT NOT NULL,
-            console TEXT NOT NULL,
+            "console" TEXT NOT NULL,
             description TEXT NOT NULL,
             price TEXT NOT NULL,
             picture TEXT NOT NULL, 
@@ -45,30 +45,34 @@ async function createInitialProducts() {
       {
         title: "Super Mario Kart",
         console: "Super Nintendo",
-        description: "In Super Mario Kart, the player takes control of one of eight Mario series characters, each with differing capabilities. In single player mode players can race against computer-controlled characters in multi-race cups over three difficulty levels. During the races, offensive and speed boosting power-ups can be used to gain an advantage. Alternatively players can race against the clock in a Time Trial mode. In multiplayer mode two players can simultaneously take part in the cups or can race against each other one-on-one in Match Race mode. In a third multiplayer mode – Battle Mode – the aim is to defeat the other players by attacking them with power-ups, destroying balloons which surround each kart.",
+        description:
+          "In Super Mario Kart, the player takes control of one of eight Mario series characters, each with differing capabilities. In single player mode players can race against computer-controlled characters in multi-race cups over three difficulty levels. During the races, offensive and speed boosting power-ups can be used to gain an advantage. Alternatively players can race against the clock in a Time Trial mode. In multiplayer mode two players can simultaneously take part in the cups or can race against each other one-on-one in Match Race mode. In a third multiplayer mode – Battle Mode – the aim is to defeat the other players by attacking them with power-ups, destroying balloons which surround each kart.",
         price: "$20.00",
         picture: "this is a placeholder for image",
       },
       {
         title: "Grand Theft Auto: Vice City",
         console: "PlayStation 2",
-        description: "[Metacritic's 2002 PS2 Game of the Year ] Welcome to Vice City. Welcome to the 1980s. Having just made it back onto the streets of Liberty City after a long stretch in maximum security, Tommy Vercetti is sent to Vice City by his old boss, Sonny Forelli. They were understandably nervous about his re-appearance in Liberty City, so a trip down south seemed like a good idea. But all does not go smoothly upon his arrival in the glamorous, hedonistic metropolis of Vice City. He's set up and is left with no money and no merchandise. Sonny wants his money back, but the biker gangs, Cuban gangsters, and corrupt politicians stand in his way. Most of Vice City seems to want Tommy dead. His only answer is to fight back and take over the city himself. Vice City offers vehicular pleasures to suit every taste. For the speed enthusiast, there's high-performance cars and motorbikes. For the sportsman, a powerboat or a golf buggy lets you enjoy the great outdoors. For those that need that sense of freedom and escape, why not charter a helicopter and see the beauty of Vice City from the air? [Rockstar]",
+        description:
+          "[Metacritic's 2002 PS2 Game of the Year ] Welcome to Vice City. Welcome to the 1980s. Having just made it back onto the streets of Liberty City after a long stretch in maximum security, Tommy Vercetti is sent to Vice City by his old boss, Sonny Forelli. They were understandably nervous about his re-appearance in Liberty City, so a trip down south seemed like a good idea. But all does not go smoothly upon his arrival in the glamorous, hedonistic metropolis of Vice City. He's set up and is left with no money and no merchandise. Sonny wants his money back, but the biker gangs, Cuban gangsters, and corrupt politicians stand in his way. Most of Vice City seems to want Tommy dead. His only answer is to fight back and take over the city himself. Vice City offers vehicular pleasures to suit every taste. For the speed enthusiast, there's high-performance cars and motorbikes. For the sportsman, a powerboat or a golf buggy lets you enjoy the great outdoors. For those that need that sense of freedom and escape, why not charter a helicopter and see the beauty of Vice City from the air? [Rockstar]",
         price: "$40.00",
         picture: "this is a placeholder for image",
       },
       {
         title: "LA Noire",
         console: "PlayStation 4",
-        description: "Amid the post-war boom of Hollywood's Golden Age, Cole Phelps, an LAPD detective is thrown headfirst into a city drowning in its own success. Corruption is rampant, the drug trade is exploding, and murder rates are at an all-time high. In his fight to climb the ranks and do what's right, Phelps must unravel the truth behind a string of arson attacks, racketeering conspiracies and brutal murders, battling the L.A. underworld and even members of his own department to uncover a secret that could shake the city to its rotten core. Using groundbreaking new animation technology that captures every nuance of an actor's facial performance in astonishing detail, L.A. Noire is a violent crime thriller that blends breathtaking action with true detective work to deliver an unprecedented interactive experience. Search for clues, chase down suspects and interrogate witnesses as you struggle to find the truth in a city where everyone has something to hide.",
+        description:
+          "Amid the post-war boom of Hollywood's Golden Age, Cole Phelps, an LAPD detective is thrown headfirst into a city drowning in its own success. Corruption is rampant, the drug trade is exploding, and murder rates are at an all-time high. In his fight to climb the ranks and do what's right, Phelps must unravel the truth behind a string of arson attacks, racketeering conspiracies and brutal murders, battling the L.A. underworld and even members of his own department to uncover a secret that could shake the city to its rotten core. Using groundbreaking new animation technology that captures every nuance of an actor's facial performance in astonishing detail, L.A. Noire is a violent crime thriller that blends breathtaking action with true detective work to deliver an unprecedented interactive experience. Search for clues, chase down suspects and interrogate witnesses as you struggle to find the truth in a city where everyone has something to hide.",
         price: "70.00",
         picture: "this is a placeholder for image",
       },
       {
         title: "Fortnite",
         console: "PC",
-        description: "Epic Games next project has you building forts and stopping a zombie invasion.",
+        description:
+          "Epic Games next project has you building forts and stopping a zombie invasion.",
         price: "70.00",
-        picture: "this is a placeholder for image"
+        picture: "this is a placeholder for image",
       },
     ];
     const products = await Promise.all(productsToCreate.map(createProduct));
