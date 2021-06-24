@@ -9,6 +9,17 @@ async function dropTables() {
   console.log("Dropping All Tables...");
   try {
     await client.query(/*sql*/ `
+        DROP TABLE IF EXISTS inventory;
+        DROP TABLE IF EXISTS ordersDetails;
+        DROP TABLE IF EXISTS orders;
+        DROP TABLE IF EXISTS reviews;
+        DROP TABLE IF EXISTS users;
+        DROP TABLE IF EXISTS roles;
+        DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS category;
+        DROP TABLE IF EXISTS productCategory;
+        DROP TABLE IF EXISTS orderStatus;
+        DROP TABLE IF EXISTS console;
         DROP TABLE IF EXISTS products;
         `);
     console.log("Finished dropping tables!");
@@ -22,15 +33,113 @@ async function createTables() {
   console.log("Creating Tables...");
   try {
     await client.query(/*sql*/ `
-          CREATE TABLE products(
-            id SERIAL PRIMARY KEY,
-            title TEXT NOT NULL,
-            "console" TEXT NOT NULL,
-            description TEXT NOT NULL,
-            price TEXT NOT NULL,
-            picture TEXT NOT NULL, 
-            reviews TEXT NOT NULL
-          );
+    CREATE TABLE "inventory" (
+      "id" SERIAL PRIMARY KEY,
+      "quantity" int,
+      "productId" int,
+      "consoleId" in,
+      "description" varchar
+    );
+
+    CREATE TABLE "ordersDetails" (
+      "id" SERIAL PRIMARY KEY,
+      "quantity" int,
+      "productId" int,
+      "unitPrice" int,
+      "orderId" int,
+      "userId" int
+    );
+
+    CREATE TABLE "orders" (
+      "id" SERIAL PRIMARY KEY,
+      "totalAmount" decimal,
+      "orderDate" datetime,
+      "orderStatusId" int,
+      "userId" int
+    );
+    
+
+    CREATE TABLE "users" (
+      "id" SERIAL PRIMARY KEY,
+      "firstName" varchar,
+      "lastName" varchar,
+      "description" varchar,
+      "email" varchar,
+      "hashedPassword" varchar,
+      "roleId" int
+    );
+    
+    CREATE TABLE "roles" (
+      "id" SERIAL PRIMARY KEY,
+      "name" varchar,
+      "description" varchar
+    );
+    
+    CREATE TABLE "products" (
+      "id" SERIAL PRIMARY KEY,
+      "title" varchar,
+      "description" varchar,
+      "picture" varchar,
+      "unitPrice" decimal
+    );
+    
+    
+    CREATE TABLE "category" (
+      "id" SERIAL PRIMARY KEY,
+      "name" varchar
+    );
+    
+    CREATE TABLE "productCategory" (
+      "id" SERIAL PRIMARY KEY,
+      "categoryId" int,
+      "productId" int
+    );
+    
+    CREATE TABLE "reviews" (
+      "id" SERIAL PRIMARY KEY,
+      "comment" varchar,
+      "productId" int,
+      "ratings" int,
+      "userId" int
+    );
+    
+    CREATE TABLE "orderStatus" (
+      "id" SERIAL PRIMARY KEY,
+      "name" varchar(30),
+      "description" varchar
+    );
+    
+    
+    CREATE TABLE "console" (
+      "id" SERIAL PRIMARY KEY,
+      "description" varchar
+    );
+    
+    ALTER TABLE "users" ADD FOREIGN KEY ("roleId") REFERENCES "roles" ("id");
+    
+    
+    ALTER TABLE "orders" ADD FOREIGN KEY ("orderStatusId") REFERENCES "orderStatus" ("id");
+    ALTER TABLE "orders" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+    
+    
+    ALTER TABLE "reviews" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    ALTER TABLE "reviews" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+    
+    
+    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
+    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+    
+    
+    ALTER TABLE "inventory" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    ALTER TABLE "inventory" ADD FOREIGN KEY ("consoleId") REFERENCES "console" ("id");
+    
+    
+    ALTER TABLE "productCategory" ADD FOREIGN KEY ("categoryId") REFERENCES "category" ("id");
+    ALTER TABLE "productCategory" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    
+    
+    
       `);
   } catch (error) {
     console.error("Error while creating tables");
