@@ -37,7 +37,7 @@ async function createTables() {
       "id" SERIAL PRIMARY KEY,
       "quantity" int,
       "productId" int,
-      "consoleId" in,
+      "consoleId" int,
       "description" varchar
     );
 
@@ -53,7 +53,7 @@ async function createTables() {
     CREATE TABLE "orders" (
       "id" SERIAL PRIMARY KEY,
       "totalAmount" decimal,
-      "orderDate" datetime,
+      "orderDate" timestamp,
       "orderStatusId" int,
       "userId" int
     );
@@ -199,7 +199,7 @@ async function rebuildDB() {
     client.connect();
     await dropTables();
     await createTables();
-    await createInitialProducts();
+    //await createInitialProducts();
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;
