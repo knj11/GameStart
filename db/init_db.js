@@ -9,18 +9,18 @@ async function dropTables() {
   console.log("Dropping All Tables...");
   try {
     await client.query(/*sql*/ `
-        DROP TABLE IF EXISTS inventory;
-        DROP TABLE IF EXISTS ordersDetails;
-        DROP TABLE IF EXISTS orders;
-        DROP TABLE IF EXISTS reviews;
-        DROP TABLE IF EXISTS users;
-        DROP TABLE IF EXISTS roles;
-        DROP TABLE IF EXISTS products;
-        DROP TABLE IF EXISTS category;
-        DROP TABLE IF EXISTS productCategory;
-        DROP TABLE IF EXISTS orderStatus;
-        DROP TABLE IF EXISTS console;
-        DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS inventory CASCADE;
+        DROP TABLE IF EXISTS "ordersDetails" CASCADE;
+        DROP TABLE IF EXISTS orders CASCADE;
+        DROP TABLE IF EXISTS reviews CASCADE;
+        DROP TABLE IF EXISTS users CASCADE;
+        DROP TABLE IF EXISTS roles CASCADE;
+        DROP TABLE IF EXISTS products CASCADE;
+        DROP TABLE IF EXISTS category CASCADE;
+        DROP TABLE IF EXISTS "productCategory" CASCADE;
+        DROP TABLE IF EXISTS "orderStatus" CASCADE;
+        DROP TABLE IF EXISTS console CASCADE;
+        DROP TABLE IF EXISTS products CASCADE;
         `);
     console.log("Finished dropping tables!");
   } catch (error) {
