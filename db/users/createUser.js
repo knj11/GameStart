@@ -13,7 +13,8 @@ async function createUser({ firstName, lastName, description, email, password, r
       INSERT INTO users("firstName", "lastName", description, email, "hashedPassword", "roleId" )
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *
-    `[(firstName, lastName, description, email, hashedPassword, roleId)]
+    `,
+      [firstName, lastName, description, email, hashedPassword, roleId]
     );
 
     if (user.password) {

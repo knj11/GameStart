@@ -9,7 +9,8 @@ async function getUserByUserName(username) {
       SELECT * 
       FROM users
       WHERE username = $1
-    `[username]
+    `,
+      [username]
     );
 
     return user;
