@@ -1,7 +1,14 @@
-const client = require("../index");
+const client = require("../client");
 const bcrypt = require("bcrypt");
 
-async function createUser({ firstName, lastName, description, email, password, roleId }) {
+async function createUser({
+  firstName,
+  lastName,
+  description,
+  email,
+  password,
+  roleId,
+}) {
   SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 
@@ -17,8 +24,8 @@ async function createUser({ firstName, lastName, description, email, password, r
       [firstName, lastName, description, email, hashedPassword, roleId]
     );
 
-    if (user.password) {
-      delete user.password;
+    if (user.hashedPassword) {
+      delete user.hashedPassword;
     }
 
     return user;

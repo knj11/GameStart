@@ -4,11 +4,11 @@ const getUserByUserName = require("./getUserByUserName");
 async function getUser({ username, password }) {
   try {
     const user = await getUserByUserName(username);
-    const hashedPassword = user.password;
+    const hashedPassword = user.hashedPassword;
     const passwordsMatch = await bcrypt.compare(password, hashedPassword);
 
     if (passwordsMatch) {
-      delete user.password;
+      delete user.hashedPassword;
       return user;
     }
   } catch (error) {
