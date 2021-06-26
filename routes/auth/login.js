@@ -1,6 +1,6 @@
-const { getUser } = require("../../db/index");
+const { getUser } = require("../../db");
 const jwt = require("jsonwebtoken");
-const { getUserByUserName } = require("../../db/index");
+const { getUserByUserName } = require("../../db");
 async function login(req, res, next) {
   const { username, password } = req.body;
   try {
