@@ -20,7 +20,6 @@ async function getUserByUserName(username) {
 }
 
 module.exports = {
-  createUser,
   getUserByUserName,
 };
 

@@ -1,4 +1,4 @@
-const { getUserById } = require("../db");
+const { getUserById } = require("../../db");
 const jwt = require("jsonwebtoken");
 
 async function attachUser(req, res, next) {
