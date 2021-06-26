@@ -199,7 +199,7 @@ async function rebuildDB() {
     client.connect();
     await dropTables();
     await createTables();
-    //await createInitialProducts();
+    await createInitialProducts();
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;
