@@ -7,7 +7,8 @@
     "server:dev": "nodemon index.js",
     "db:build": "node ./db/init_db",
     "client:dev": "react-scripts start",
-    "client:build": "react-scripts build"
+    "client:build": "react-scripts build",
+    "launch:db": "sudo service postgresql start"
   },
   "keywords": [],
   "author": "",
@@ -26,5 +27,17 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
