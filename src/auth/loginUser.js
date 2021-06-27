@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const loginRoute = "/api/login"
+const loginRoute = "/api/users/login"
 
 export async function loginUser({ username, password }) {
   try {

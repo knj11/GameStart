@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const createUserRoute = "/api/users"
+const createUserRoute = "/api/users/signUp"
 
 export async function createNewUser({username, password}) {
   try {
