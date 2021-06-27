@@ -26,4 +26,4 @@ async function createProduct({
   }
 }
 
-module.exports = createProduct;
+module.exports = { createProduct };
