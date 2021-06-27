@@ -10,12 +10,6 @@ const useStyles = makeStyles({
   gridContainer: {
     padding: "18px"
   },
-  cardHeight: {
-    height: "200px"
-  },
-  scroll: {
-    overflow: "auto",
-  }
 })
 
 const App = () => {
