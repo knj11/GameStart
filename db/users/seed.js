@@ -1,3 +1,14 @@
+const seedRoles = [
+  {
+    name: "admin",
+    description: "admin has privilaged access to add products"
+  },
+  {
+    name: "customer",
+    description: "Customers can shop and purchase products"
+  }
+]
+
 const seedUsers = [
   {
     firstName: "John",
@@ -161,4 +172,7 @@ const seedUsers = [
   },
 ];
 
-module.exports = { seedUsers };
+module.exports = {
+  seedUsers,
+  seedRoles
+};

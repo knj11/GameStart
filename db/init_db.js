@@ -1,14 +1,17 @@
 // code to build and initialize DB
 
 const {
-  client,
   createProduct,
   seedUsers,
+  seedRoles,
   productsToCreate,
+  createRole,
   getAllProducts,
   createUser,
   // other db methods
 } = require("./");
+
+const { client } = require("./client")
 
 async function dropTables() {
   console.log("Dropping All Tables...");
@@ -158,11 +161,26 @@ async function createInitialProducts() {
     const products = await Promise.all(productsToCreate.map(createProduct));
     console.log("Products created");
     console.log(products);
-    const users = await Promise.all(seedUsers.map(createUser));
-    console.log("Users Created", users);
   } catch (error) {
     console.error("Error creating initial products");
     throw error;
+  }
+}
+
+async function createInitialUsers() {
+  try {
+    //Need to create the roles table 1st before adding Users
+    console.log("Starting to create initial Users Roles...");
+    const roles = await Promise.all(seedRoles.map(createRole))
+    console.log("Finished creating roles")
+    console.log(roles)
+    console.log("Starting to create initial Users...");
+    const users = await Promise.all(seedUsers.map(createUser));
+    console.log("Users Created", users);
+  } catch (error) {
+    console.log("Error creating initial Users")
+    console.error(error)
+    throw error
   }
 }
 
@@ -172,6 +190,7 @@ async function rebuildDB() {
     await dropTables();
     await createTables();
     await createInitialProducts();
+    await createInitialUsers()
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;
