@@ -16,4 +16,4 @@ async function getUser({ username, password }) {
   }
 }
 
-module.exports = getUser;
+module.exports = { getUser };

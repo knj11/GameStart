@@ -1,6 +1,4 @@
-
-​
- const seedUsers = [
+const seedUsers = [
   {
     firstName: "John",
     lastName: "Doe",
@@ -163,4 +161,4 @@
   },
 ];
 
-module.exports=seedUsers
+module.exports = { seedUsers };

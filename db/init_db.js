@@ -1,5 +1,4 @@
 // code to build and initialize DB
-import createUser from "./users/createUser";
 
 const {
   client,
@@ -7,6 +6,7 @@ const {
   seedUsers,
   productsToCreate,
   getAllProducts,
+  createUser,
   // other db methods
 } = require("./");
 

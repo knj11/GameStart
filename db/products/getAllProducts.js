@@ -14,4 +14,4 @@ async function getAllProducts() {
   }
 }
 
-module.exports = getAllProducts;
+module.exports = { getAllProducts };

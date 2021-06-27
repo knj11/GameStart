@@ -23,4 +23,4 @@ module.exports = {
   getUserByUserName,
 };
 
-module.exports = getUserByUserName;
+module.exports = { getUserByUserName };
