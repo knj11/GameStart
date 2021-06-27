@@ -1,10 +1,12 @@
 import axios from 'axios'
 
+const PRODUCT_URL = 'api/products'
+
 export async function fetchAllProducts() {
   try {
-    const {data: products} = await axios.get('/products')
-    console.log("products",products)
-    return products
+    const { data: { allProducts } } = await axios.get(PRODUCT_URL)
+    console.log("products", allProducts)
+    return allProducts
   } catch (error) {
     console.log("Trouble fetching All Products")
     console.dir(error)
