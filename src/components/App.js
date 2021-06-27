@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Typography } from "@material-ui/core"
+import { Container, Card, Typography, CardContent, CardHeader, Grid } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+
+import { GameCard } from "./index"
 
 import { fetchAllProducts } from '../api'
 
+const useStyles = makeStyles({
+  gridContainer: {
+    padding: "18px"
+  },
+  cardHeight: {
+    height: "200px"
+  },
+  scroll: {
+    overflow: "auto",
+  }
+})
+
 const App = () => {
+  const classes = useStyles()
   const [products, setProducts] = useState(false)
 
   useEffect(() => {
@@ -12,20 +28,12 @@ const App = () => {
       .catch((error) => console.log("Request Not Made"))
   }, [])
 
+  const renderProductCards = (products) => (products) && products.map((product) => <GameCard product={product} />)
+
   return (
-    <Container>
-      {(products) && products.map((product, idx) => {
-        return (
-          <Card key={idx} elevation={2}>
-            <CardContent>
-              <Typography>
-                {/* Will add properties once we decide on columns*/}
-              </Typography>
-            </CardContent>
-          </Card>
-        )
-      })}
-    </Container>
+    <Grid container spacing={3} className={classes.gridContainer}>
+      {renderProductCards(products)}
+    </Grid>
   )
 
 }
