@@ -1,12 +1,12 @@
 
 ​
-export const seedUsers = [
+ const seedUsers = [
   {
     firstName: "John",
     lastName: "Doe",
     description: "unknown male administrator",
     email: "john.doe@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 1,
   },
   {
@@ -14,7 +14,7 @@ export const seedUsers = [
     lastName: "Doe",
     description: "person",
     email: "jane.doe@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -22,7 +22,7 @@ export const seedUsers = [
     lastName: "De Bruyne",
     description: "person",
     email: "kevin@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -30,7 +30,7 @@ export const seedUsers = [
     lastName: "Sterling",
     description: "person",
     email: "raheem@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -38,7 +38,7 @@ export const seedUsers = [
     lastName: "Foden",
     description: "person",
     email: "phil@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -46,7 +46,7 @@ export const seedUsers = [
     lastName: "Stones",
     description: "person",
     email: "john.stones@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -54,7 +54,7 @@ export const seedUsers = [
     lastName: "Doe",
     description: "unknown female administrator",
     email: "john.doe@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 1,
   },
   {
@@ -62,7 +62,7 @@ export const seedUsers = [
     lastName: "Pulisic",
     description: "person",
     email: "christian@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -70,7 +70,7 @@ export const seedUsers = [
     lastName: "McKennie",
     description: "person",
     email: "weston@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -78,7 +78,7 @@ export const seedUsers = [
     lastName: "Dest",
     description: "person",
     email: "sergino@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -86,7 +86,7 @@ export const seedUsers = [
     lastName: "Adams",
     description: "person",
     email: "tyler@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -94,7 +94,7 @@ export const seedUsers = [
     lastName: "Aguero",
     description: "person",
     email: "sergio@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -102,7 +102,7 @@ export const seedUsers = [
     lastName: "Torres",
     description: "person",
     email: "ferran@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -110,7 +110,7 @@ export const seedUsers = [
     lastName: "Barkley",
     description: "person",
     email: "charles@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -118,7 +118,7 @@ export const seedUsers = [
     lastName: "Newton",
     description: "person",
     email: "cam@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -126,7 +126,7 @@ export const seedUsers = [
     lastName: "Messi",
     description: "person",
     email: "lionel@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -134,7 +134,7 @@ export const seedUsers = [
     lastName: "Rogen",
     description: "person",
     email: "seth@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -142,7 +142,7 @@ export const seedUsers = [
     lastName: "Flocka Flame",
     description: "person",
     email: "waka@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -150,7 +150,7 @@ export const seedUsers = [
     lastName: "Gordon Green",
     description: "person",
     email: "david@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
   {
@@ -158,7 +158,7 @@ export const seedUsers = [
     lastName: "Berninger",
     description: "person",
     email: "matt@aol.com",
-    hashedPassword: "password123",
+    password: "password123",
     roleId: 2,
   },
 ];
