@@ -1,6 +1,7 @@
 module.exports = {
   ...require("./createProduct"),
-  ...require("./getAllProducts"),
+  ...require("./products/getAllProducts"),
   ...require("./client"),
   ...require("./users"),
+  ...require("./products"),
 };

@@ -1,4 +1,5 @@
 const getUserByUserName = require("./getUserByUserName");
+import seedUsers from "./seed";
 const createUser = require("./createUser.js");
 const getUser = require("./getUser");
 
@@ -9,4 +10,5 @@ module.exports = {
   getUserByUserName,
   createUser,
   getUser,
+  seedUsers,
 };
