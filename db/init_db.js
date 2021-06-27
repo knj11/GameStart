@@ -1,6 +1,5 @@
 // code to build and initialize DB
 import createUser from "./users/createUser";
-import { productsToCreate } from "./products/seedProducts";
 
 const {
   client,
@@ -9,7 +8,7 @@ const {
   productsToCreate,
   getAllProducts,
   // other db methods
-} = require("./index");
+} = require("./");
 
 async function dropTables() {
   console.log("Dropping All Tables...");
