@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Typography, CardContent, CardHeader, Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import { GameCard } from "./index"
+import { GameCard, NavBar } from "./index"
 
 import { fetchAllProducts } from '../api'
 
@@ -25,9 +25,12 @@ const App = () => {
   const renderProductCards = (products) => (products) && products.map((product) => <GameCard product={product} />)
 
   return (
-    <Grid container spacing={3} className={classes.gridContainer}>
-      {renderProductCards(products)}
-    </Grid>
+    <>
+      <NavBar />
+      <Grid container spacing={3} className={classes.gridContainer}>
+        {renderProductCards(products)}
+      </Grid>
+    </>
   )
 
 }
