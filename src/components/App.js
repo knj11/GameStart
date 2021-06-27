@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import { GameCard, NavBar } from "./index"
+import { GameCard, NavBar, AuthDialog } from "./index"
 
 import { fetchAllProducts } from '../api'
 

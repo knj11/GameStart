@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+import { AuthDialog } from '.';
+
 const useStyles = makeStyles({
   flex: {
     display: "flex",
@@ -12,11 +14,6 @@ const useStyles = makeStyles({
 
 const NavBar = () => {
   const classes = useStyles()
-
-  const [accountMenu, setAccountMenu] = useState(null)
-
-  const handleAccountMenu = (e) => setAccountMenu(e.currentTarget)
-  const handleClose = (e) => setAccountMenu(null)
   
 
   return (
@@ -26,13 +23,11 @@ const NavBar = () => {
           GameStart
         </Typography>
         <div>
-          <IconButton onClick={handleAccountMenu} color="inherit">
-            <AccountCircleIcon />
-          </IconButton>
-          <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
+          <AuthDialog />
+          {/* <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
             <MenuItem>Sign-up</MenuItem>
             <MenuItem>Log-In</MenuItem>
-          </Menu>
+          </Menu> */}
         </div>
       </Toolbar>
     </AppBar>

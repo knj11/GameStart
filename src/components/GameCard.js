@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardHeader, Grid } from "@material-ui/core"
+import { Card, CardContent, CardHeader, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles({
@@ -10,7 +10,9 @@ const useStyles = makeStyles({
     height: "200px"
   },
   scroll: {
+    //make sure to consider parent "contanter" when setting height. If larger the box wont scroll
     overflow: "auto",
+    height: "100px"
   }
 })
 
@@ -22,8 +24,14 @@ const GameCard = ({ product }) => {
       <Card key={product.id} elevation={2} className={classes.cardHeight}>
         <CardHeader title={product.title} subheader={product.unitPrice}>
         </CardHeader>
+
         <CardContent className={classes.scroll}>
-          {product.description}
+          <Typography >
+            Description:
+          </Typography>
+          <Typography>
+            {product.description}
+          </Typography>
         </CardContent>
       </Card>
     </Grid>
