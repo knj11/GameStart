@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core';
 import { AppBar, Toolbar, Typography } from "@material-ui/core"
 
-import { AuthDialog } from '.';
+import { AuthDialog, AccountMenu } from '.';
 
 const useStyles = makeStyles({
   flex: {
@@ -22,7 +22,7 @@ const NavBar = ({ user, setUser }) => {
           GameStart
         </Typography>
         <div>
-          {(user) ? '' : <AuthDialog setUser={setUser} />}
+          {(user) ? <AccountMenu setUser={setUser} /> : <AuthDialog setUser={setUser} />}
           {/* <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
             <MenuItem>Sign-up</MenuItem>
             <MenuItem>Log-In</MenuItem>
