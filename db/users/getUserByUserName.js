@@ -8,7 +8,7 @@ async function getUserByUserName(username) {
       `
       SELECT * 
       FROM users
-      WHERE email = $1
+      WHERE email = $1;
     `,
       [username]
     );
