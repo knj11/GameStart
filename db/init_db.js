@@ -71,7 +71,6 @@ async function createTables() {
       "id" SERIAL PRIMARY KEY,
       "firstName" varchar,
       "lastName" varchar,
-      "description" varchar,
       "email" varchar,
       "hashedPassword" varchar,
       "roleId" int

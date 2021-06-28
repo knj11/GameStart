@@ -1,11 +1,11 @@
 const { client } = require("../client");
 const bcrypt = require("bcrypt");
-const { SALT_COUNT } = process.env
+//const { SALT_COUNT } = process.env || 10
+const SALT_COUNT = 10
 
 async function createUser({
   firstName,
   lastName,
-  description,
   email,
   password,
   roleId,
@@ -17,11 +17,11 @@ async function createUser({
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users("firstName", "lastName", description, email, "hashedPassword", "roleId" )
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO users("firstName", "lastName", email, "hashedPassword", "roleId" )
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `,
-      [firstName, lastName, description, email, hashedPassword, roleId]
+      [firstName, lastName, email, hashedPassword, roleId]
     );
 
     if (user.hashedPassword) {

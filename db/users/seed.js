@@ -13,7 +13,6 @@ const seedUsers = [
   {
     firstName: "John",
     lastName: "Doe",
-    description: "unknown male administrator",
     email: "john.doe@aol.com",
     password: "password123",
     roleId: 1,
@@ -21,7 +20,6 @@ const seedUsers = [
   {
     firstName: "Jane",
     lastName: "Doe",
-    description: "person",
     email: "jane.doe@aol.com",
     password: "password123",
     roleId: 2,
@@ -29,7 +27,6 @@ const seedUsers = [
   {
     firstName: "Kevin",
     lastName: "De Bruyne",
-    description: "person",
     email: "kevin@aol.com",
     password: "password123",
     roleId: 2,
@@ -37,7 +34,6 @@ const seedUsers = [
   {
     firstName: "Raheem",
     lastName: "Sterling",
-    description: "person",
     email: "raheem@aol.com",
     password: "password123",
     roleId: 2,
@@ -45,7 +41,6 @@ const seedUsers = [
   {
     firstName: "Phil",
     lastName: "Foden",
-    description: "person",
     email: "phil@aol.com",
     password: "password123",
     roleId: 2,
@@ -53,7 +48,6 @@ const seedUsers = [
   {
     firstName: "John",
     lastName: "Stones",
-    description: "person",
     email: "john.stones@aol.com",
     password: "password123",
     roleId: 2,
@@ -61,7 +55,6 @@ const seedUsers = [
   {
     firstName: "Jane",
     lastName: "Doe",
-    description: "unknown female administrator",
     email: "john.doe@aol.com",
     password: "password123",
     roleId: 1,
@@ -69,7 +62,6 @@ const seedUsers = [
   {
     firstName: "Christian",
     lastName: "Pulisic",
-    description: "person",
     email: "christian@aol.com",
     password: "password123",
     roleId: 2,
@@ -77,7 +69,6 @@ const seedUsers = [
   {
     firstName: "Weston",
     lastName: "McKennie",
-    description: "person",
     email: "weston@aol.com",
     password: "password123",
     roleId: 2,
@@ -85,7 +76,6 @@ const seedUsers = [
   {
     firstName: "Sergino",
     lastName: "Dest",
-    description: "person",
     email: "sergino@aol.com",
     password: "password123",
     roleId: 2,
@@ -93,7 +83,6 @@ const seedUsers = [
   {
     firstName: "Tyler",
     lastName: "Adams",
-    description: "person",
     email: "tyler@aol.com",
     password: "password123",
     roleId: 2,
@@ -101,7 +90,6 @@ const seedUsers = [
   {
     firstName: "Sergio",
     lastName: "Aguero",
-    description: "person",
     email: "sergio@aol.com",
     password: "password123",
     roleId: 2,
@@ -109,7 +97,6 @@ const seedUsers = [
   {
     firstName: "Ferran",
     lastName: "Torres",
-    description: "person",
     email: "ferran@aol.com",
     password: "password123",
     roleId: 2,
@@ -117,7 +104,6 @@ const seedUsers = [
   {
     firstName: "Charles",
     lastName: "Barkley",
-    description: "person",
     email: "charles@aol.com",
     password: "password123",
     roleId: 2,
@@ -125,7 +111,6 @@ const seedUsers = [
   {
     firstName: "Cam",
     lastName: "Newton",
-    description: "person",
     email: "cam@aol.com",
     password: "password123",
     roleId: 2,
@@ -133,7 +118,6 @@ const seedUsers = [
   {
     firstName: "Lionel",
     lastName: "Messi",
-    description: "person",
     email: "lionel@aol.com",
     password: "password123",
     roleId: 2,
@@ -141,7 +125,6 @@ const seedUsers = [
   {
     firstName: "Seth",
     lastName: "Rogen",
-    description: "person",
     email: "seth@aol.com",
     password: "password123",
     roleId: 2,
@@ -149,7 +132,6 @@ const seedUsers = [
   {
     firstName: "Waka",
     lastName: "Flocka Flame",
-    description: "person",
     email: "waka@aol.com",
     password: "password123",
     roleId: 2,
@@ -157,7 +139,6 @@ const seedUsers = [
   {
     firstName: "David",
     lastName: "Gordon Green",
-    description: "person",
     email: "david@aol.com",
     password: "password123",
     roleId: 2,
@@ -165,7 +146,6 @@ const seedUsers = [
   {
     firstName: "Matt",
     lastName: "Berninger",
-    description: "person",
     email: "matt@aol.com",
     password: "password123",
     roleId: 2,
