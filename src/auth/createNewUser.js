@@ -2,13 +2,12 @@ import axios from 'axios'
 
 const createUserRoute = "/api/users/signUp"
 
-export async function createNewUser({email, password}) {
+export async function createNewUser({ email, password, lastName, firstName }) {
   try {
-    const user = await axios.post(createUserRoute, {email, password})
-    localStorage.setItem("user", JSON.stringify(user))
+    const { data: user } = await axios.post(createUserRoute, { email, password, lastName, firstName })
     return user
   } catch (error) {
-    console.log("trouble creating new user")
-    console.dir(error)
+    console.log("Issue Signing Up")
+    throw error.response.data
   }
 }
