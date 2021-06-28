@@ -1,33 +1,35 @@
-const { getUser } = require("../../db");
+const { getUser, getUserByEmail } = require("../../db");
 const jwt = require("jsonwebtoken");
-const { getUserByUserName } = require("../../db");
+const { JWT_SECRET } = process.env
+
 async function login(req, res, next) {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    const validUser = await getUserByUserName(username);
+    const validUser = await getUserByEmail(email);
 
     if (!validUser) {
-      next({
+      console.log("Not a valid User")
+      throw {
         name: "InvalidUser",
-        message: "User name is not recognized.",
+        message: "User name / Email is not recognized.",
         status: 400,
-      });
+      };
     }
-    const validPassword = await getUser({ username, password });
+    const validPassword = await getUser({ email, password });
     if (!validPassword) {
-      next({
+      throw {
         name: "InvalidPassword",
         message: "Ivalid Password Error",
         status: 400,
-      });
+      };
     }
     const token = jwt.sign(
-      { id: validUser.id, username: validUser.username },
-      process.env.JWT_SECRET
+      { id: validUser.id, email: validUser.email },
+      JWT_SECRET
     );
 
     res.send({
-      user: { id: validUser.id, username: validUser.username },
+      user: { id: validUser.id, email: validUser.email },
       message: "you're logged in!",
       token,
     });

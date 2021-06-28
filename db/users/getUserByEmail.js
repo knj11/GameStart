@@ -1,6 +1,6 @@
 const { client } = require("../client");
 
-async function getUserByUserName(username) {
+async function getUserByEmail(email) {
   try {
     const {
       rows: [user],
@@ -10,7 +10,7 @@ async function getUserByUserName(username) {
       FROM users
       WHERE email = $1;
     `,
-      [username]
+      [email]
     );
 
     return user;
@@ -20,7 +20,5 @@ async function getUserByUserName(username) {
 }
 
 module.exports = {
-  getUserByUserName,
+  getUserByEmail,
 };
-
-module.exports = { getUserByUserName };

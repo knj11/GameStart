@@ -1,15 +1,17 @@
 const bcrypt = require("bcrypt");
-const getUserByUserName = require("./getUserByUserName");
+const { getUserByEmail } = require("./getUserByEmail");
 
-async function getUser({ username, password }) {
+async function getUser({ email, password }) {
   try {
-    const user = await getUserByUserName(username);
+    const user = await getUserByEmail(email);
     const hashedPassword = user.hashedPassword;
     const passwordsMatch = await bcrypt.compare(password, hashedPassword);
 
     if (passwordsMatch) {
       delete user.hashedPassword;
       return user;
+    } else {
+      return null
     }
   } catch (error) {
     throw error;

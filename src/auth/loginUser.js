@@ -2,13 +2,12 @@ import axios from "axios"
 
 const loginRoute = "/api/users/login"
 
-export async function loginUser({ username, password }) {
+export async function loginUser({ email, password }) {
   try {
-    const user = await axios.post(loginRoute, { username, password })
-    localStorage.setItem("user", JSON.stringify(user))
-    return user
+    const response = await axios.post(loginRoute, { email, password })
+    return response
   } catch (error) {
     console.log("Issue Signing in")
-    console.dir(error)
+    throw error.response.data
   }
 }
