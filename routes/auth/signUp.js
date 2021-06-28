@@ -1,50 +1,48 @@
-const { createUser } = require("../../db/index");
-const { getUserByUserName } = require("../../db/index");
+const { createUser, getUserByEmail } = require("../../db/index");
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = process.env
 
 async function signUp(req, res, next) {
   const {
-    username,
+    email,
     password,
     description,
     firstName,
     lastName,
-    roleId,
-    passWord,
   } = req.body;
 
   try {
-    if (password.split("").length < 8) {
-      next("Password too short!");
-    } else {
-      const checkUser = await getUserByUserName(username);
-      if (checkUser) {
-        next("User name already used!");
-      } else {
-        const createdUser = await createUser({
-          username,
-          password,
-          description,
-          firstName,
-          lastName,
-          roleId,
-          passWord,
-        });
-        const token = jwt.sign(
-          { id: createdUser.id, username: createdUser.username },
-          process.env.JWT_SECRET
-        );
+    const checkUser = await getUserByEmail(email);
+    if (checkUser) throw {
+      name: "EmailTaken",
+      message: "Email is already in Use. Please try loggin in",
+      status: 400,
+    };
 
-        res.json({
-          user: {
-            id: createdUser.id,
-            username: createdUser.username,
-          },
-          message: `You are signed up successfully!`,
-          token,
-        });
-      }
-    }
+    // RoleId=2 means its a standard Customer
+    const roleId = 2
+    const createdUser = await createUser({
+      email,
+      password,
+      description,
+      firstName,
+      lastName,
+      roleId
+    });
+    const token = jwt.sign(
+      { id: createdUser.id, email: createdUser.email },
+      JWT_SECRET
+    );
+
+    res.json({
+      user: {
+        id: createdUser.id,
+        email: createdUser.email,
+      },
+      message: `You are signed up successfully!`,
+      token,
+    });
+
   } catch (error) {
     next(error);
   }
