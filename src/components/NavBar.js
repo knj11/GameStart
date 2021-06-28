@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core';
-import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { AppBar, Toolbar, Typography } from "@material-ui/core"
 
 import { AuthDialog } from '.';
 
@@ -12,9 +11,9 @@ const useStyles = makeStyles({
   }
 })
 
-const NavBar = () => {
+const NavBar = ({ user, setUser }) => {
   const classes = useStyles()
-  
+
 
   return (
     <AppBar position="sticky">
@@ -23,7 +22,7 @@ const NavBar = () => {
           GameStart
         </Typography>
         <div>
-          <AuthDialog />
+          {(user) ? '' : <AuthDialog setUser={setUser} />}
           {/* <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
             <MenuItem>Sign-up</MenuItem>
             <MenuItem>Log-In</MenuItem>
