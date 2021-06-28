@@ -3,4 +3,5 @@ module.exports = {
   ...require("./seedProducts"),
   ...require("./getAllProducts"),
   ...require("./createConsoles"),
+  ...require("./getUnitPrice"),
 };

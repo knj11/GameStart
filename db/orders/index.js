@@ -1,5 +1,6 @@
 module.exports = { 
   ...require("./seedOrders"),
   ...require("./createOrderStatus"),
-  ...require("./createNewOrder")
+  ...require("./createNewOrder"),
+  ...require("./addItem"),
 }

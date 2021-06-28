@@ -14,6 +14,8 @@ const {
   createNewOrder,
   createConsoles,
   consolesToCreate,
+  seedOrderItems,
+  addItem
   // other db methods
 } = require("./");
 
@@ -57,11 +59,9 @@ async function createTables() {
 
     CREATE TABLE "ordersItem" (
       "id" SERIAL PRIMARY KEY,
-      "quantity" int,
-      "productId" int,
-      "unitPrice" int,
-      "orderId" int,
-      "userId" int
+      "quantity" int DEFAULT 1,
+      "productId" int NOT NULL,
+      "orderId" int NOT NULL
     );
 
     CREATE TABLE "orders" (
@@ -140,7 +140,6 @@ async function createTables() {
     
     ALTER TABLE "ordersItem" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
     ALTER TABLE "ordersItem" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
-    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
     
     
     ALTER TABLE "inventory" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
@@ -199,10 +198,27 @@ async function createInitialOrders() {
     console.log("Finished creating orderStatuses");
     console.log(statuses);
 
+<<<<<<< HEAD
     console.log("Starting to create orders");
     const orders = await Promise.all(seedInitalOrders.map(createNewOrder));
     console.log("Finished creating orders");
     console.log(orders);
+=======
+    console.log("Starting to create orders")
+    const orders = await Promise.all(seedInitalOrders.map(createNewOrder))
+    console.log("Finished creating orders")
+    console.log(orders)
+
+    console.log("Adding Items to Orders")
+    const items = await Promise.all(seedOrderItems.map(addItem))
+    console.log("Finished adding items to orders")
+    console.log(items)
+
+    console.log("Show Orders table with new Totals")
+    const { rows: newOrdersTotal } = await client.query(`SELECT * FROM orders;`)
+    console.log(newOrdersTotal)
+
+>>>>>>> DB logic for Adding new items to cart
   } catch (error) {
     console.log("Error creating initial Orders");
     console.error(error);

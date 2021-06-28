@@ -35,4 +35,73 @@ const seedInitalOrders = [
   },
 ];
 
-module.exports = { seedOrderStatus, seedInitalOrders };
+const seedOrderItems = [
+  //Orders for Customer 1
+  {
+    productId: 1,
+    orderId: 1,
+    userId: 1
+  },
+  {
+    productId: 7,
+    orderId: 1,
+    userId: 1
+  },
+  {
+    productId: 9,
+    orderId: 1,
+    userId: 1
+  },
+  //Orders for Customer 2
+  {
+    productId: 5,
+    orderId: 2,
+    userId: 2
+  },
+  {
+    productId: 11,
+    orderId: 2,
+    userId: 2
+  },
+  //Orders for Customer 4
+  {
+    productId: 2,
+    orderId: 4,
+    userId: 4
+  },
+  {
+    productId: 17,
+    orderId: 4,
+    userId: 4
+  },
+  {
+    productId: 19,
+    orderId: 4,
+    userId: 4
+  },
+  {
+    productId: 12,
+    orderId: 4,
+    userId: 4
+  },
+  //Orders for Customer 5
+  {
+    productId: 10,
+    orderId: 5,
+    userId: 5
+  },
+  {
+    productId: 13,
+    orderId: 5,
+    userId: 5
+  },
+  //Order for Customer 6
+  {
+    productId: 8,
+    orderId: 6,
+    userId: 6
+  },
+
+]
+
+module.exports = { seedOrderStatus, seedInitalOrders, seedOrderItems }
