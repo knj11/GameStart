@@ -20,7 +20,7 @@ async function dropTables() {
   try {
     await client.query(/*sql*/ `
         DROP TABLE IF EXISTS inventory CASCADE;
-        DROP TABLE IF EXISTS "ordersDetails" CASCADE;
+        DROP TABLE IF EXISTS "ordersItem" CASCADE;
         DROP TABLE IF EXISTS orders CASCADE;
         DROP TABLE IF EXISTS reviews CASCADE;
         DROP TABLE IF EXISTS users CASCADE;
@@ -51,7 +51,7 @@ async function createTables() {
       "description" varchar
     );
 
-    CREATE TABLE "ordersDetails" (
+    CREATE TABLE "ordersItem" (
       "id" SERIAL PRIMARY KEY,
       "quantity" int,
       "productId" int,
@@ -135,9 +135,9 @@ async function createTables() {
     ALTER TABLE "reviews" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
     
     
-    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
-    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
-    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
     
     
     ALTER TABLE "inventory" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
