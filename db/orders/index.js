@@ -4,4 +4,5 @@ module.exports = {
   ...require("./createNewOrder"),
   ...require("./addItem"),
   ...require("./updateOrderStatus"),
+  ...require("./deleteItem"),
 }

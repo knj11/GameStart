@@ -1,8 +1,7 @@
 const seedOrderStatus = [
   {
     name: "In Progress",
-    description:
-      "Customer is adding products to Shopping Cart but has not placed order yet",
+    description: "Customer is adding products to Shopping Cart but has not placed order yet",
   },
   {
     name: "Completed",
