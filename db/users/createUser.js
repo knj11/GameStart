@@ -1,5 +1,6 @@
 const { client } = require("../client");
 const bcrypt = require("bcrypt");
+const { SALT_COUNT } = process.env
 
 async function createUser({
   firstName,
@@ -9,7 +10,6 @@ async function createUser({
   password,
   roleId,
 }) {
-  SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 
   try {
@@ -19,7 +19,7 @@ async function createUser({
       `
       INSERT INTO users("firstName", "lastName", description, email, "hashedPassword", "roleId" )
       VALUES ($1, $2, $3, $4, $5, $6)
-      RETURNING *
+      RETURNING *;
     `,
       [firstName, lastName, description, email, hashedPassword, roleId]
     );
