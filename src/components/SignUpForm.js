@@ -1,6 +1,6 @@
 import React from 'react'
-import { Dialog, TextField, DialogTitle, IconButton, DialogContentText, DialogContent, Button, DialogActions, Link, Typography } from '@material-ui/core'
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import { Button, DialogActions, Typography } from '@material-ui/core'
+import { Formik, Form } from 'formik';
 import * as yup from 'yup'
 
 import { MyTextField } from './';
@@ -24,7 +24,6 @@ const SignUpForm = ({ handleClose, setUser }) => {
       //example login john.doe@aol.com / password123
       if (!(password === verifyPassword)) throw { name: "MissMatch", message: "Passwords did not match" }
       const userSignUp = await createNewUser({ email, password, firstName, lastName })
-      console.log("Login Response", userSignUp)
       setUser(userSignUp)
       handleClose()
     } catch (error) {

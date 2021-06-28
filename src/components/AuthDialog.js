@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { Dialog, DialogTitle, IconButton, DialogContentText, DialogContent, Button, DialogActions, Link } from '@material-ui/core'
+import { Dialog, DialogTitle, IconButton, DialogContentText, DialogContent, Link } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import { TextField } from '@material-ui/core';
 
 import { LoginForm, SignUpForm } from './'
 
@@ -10,9 +9,8 @@ const AuthDialog = ({ setUser }) => {
   const [open, setOpen] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false)
 
-  const handleClose = () => {
-    setOpen(false)
-  };
+  const handleClose = () => setOpen(false)
+  const toggleForm = () => (isNewUser) ? setIsNewUser(false) : setIsNewUser(true)
 
   const handleSignUpOpen = () => {
     setOpen(true)
@@ -23,12 +21,6 @@ const AuthDialog = ({ setUser }) => {
     setOpen(true)
     setIsNewUser(false)
   }
-
-
-  const toggleForm = () => {
-    (isNewUser) ? setIsNewUser(false) : setIsNewUser(true)
-  }
-
 
   return (
     <>
@@ -54,14 +46,6 @@ const AuthDialog = ({ setUser }) => {
           </DialogContentText>
           {(isNewUser) ? <SignUpForm handleClose={handleClose} setUser={setUser} />: <LoginForm handleClose={handleClose} setUser={setUser} />}
         </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={() => (isNewUser) ? signUpSubmit() : logInSubmit()} color="primary">
-            Submit
-          </Button>
-        </DialogActions> */}
       </Dialog>
     </>
   )
