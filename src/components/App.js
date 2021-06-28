@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { GameCard, NavBar, AuthDialog } from "./index"
 
 import { fetchAllProducts } from '../api'
+import { useLocalStorage } from "./hooks";
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles({
 const App = () => {
   const classes = useStyles()
   const [products, setProducts] = useState(false)
+  const [user, setUser] = useLocalStorage("user", "")
 
   useEffect(() => {
     fetchAllProducts()
@@ -26,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar user={user} setUser={setUser} />
       <Grid container spacing={3} className={classes.gridContainer}>
         {renderProductCards(products)}
       </Grid>
