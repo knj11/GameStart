@@ -28,8 +28,10 @@ async function login(req, res, next) {
       JWT_SECRET
     );
 
+    delete validUser.hashedPassword
+
     res.send({
-      user: { id: validUser.id, email: validUser.email },
+      user: validUser,
       message: "you're logged in!",
       token,
     });
