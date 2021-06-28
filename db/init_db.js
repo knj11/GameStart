@@ -9,7 +9,9 @@ const {
   getAllProducts,
   createUser,
   seedOrderStatus,
-  createOrderStatus
+  createOrderStatus,
+  seedInitalOrders,
+  createNewOrder
   // other db methods
 } = require("./");
 
@@ -62,12 +64,11 @@ async function createTables() {
 
     CREATE TABLE "orders" (
       "id" SERIAL PRIMARY KEY,
-      "totalAmount" decimal,
-      "orderDate" timestamp,
-      "orderStatusId" int,
-      "userId" int
+      "totalAmount" decimal DEFAULT 0.00,
+      "statusDate" timestamp DEFAULT CURRENT_TIMESTAMP,
+      "orderStatusId" int DEFAULT 1,
+      "userId" int NOT NULL
     );
-    
 
     CREATE TABLE "users" (
       "id" SERIAL PRIMARY KEY,
@@ -191,6 +192,11 @@ async function createInitialOrders() {
     const statuses = await Promise.all(seedOrderStatus.map(createOrderStatus))
     console.log("Finished creating orderStatuses")
     console.log(statuses)
+
+    console.log("Starting to create orders")
+    const orders = await Promise.all(seedInitalOrders.map(createNewOrder))
+    console.log("Finished creating orders")
+    console.log(orders)
   } catch (error) {
     console.log("Error creating initial Orders")
     console.error(error)

@@ -1,4 +1,5 @@
 module.exports = { 
   ...require("./seedOrders"),
-  ...require("./createOrderStatus")
+  ...require("./createOrderStatus"),
+  ...require("./createNewOrder")
 }
