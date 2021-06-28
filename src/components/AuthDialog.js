@@ -4,7 +4,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import { TextField } from '@material-ui/core';
 
-import { LoginForm } from './'
+import { LoginForm, SignUpForm } from './'
 
 const AuthDialog = ({ setUser }) => {
   const [open, setOpen] = useState(false);
@@ -52,7 +52,7 @@ const AuthDialog = ({ setUser }) => {
               {(isNewUser) ? 'Login' : 'Sign Up'}
             </Link>
           </DialogContentText>
-          {(isNewUser) ? '': <LoginForm handleClose={handleClose} setUser={setUser} />}
+          {(isNewUser) ? <SignUpForm handleClose={handleClose} setUser={setUser} />: <LoginForm handleClose={handleClose} setUser={setUser} />}
         </DialogContent>
         {/* <DialogActions>
           <Button onClick={handleClose} color="primary">
