@@ -8,6 +8,8 @@ const {
   createRole,
   getAllProducts,
   createUser,
+  seedOrderStatus,
+  createOrderStatus
   // other db methods
 } = require("./");
 
@@ -183,13 +185,27 @@ async function createInitialUsers() {
   }
 }
 
+async function createInitialOrders() {
+  try {
+    console.log("Starting to create orderStatus")
+    const statuses = await Promise.all(seedOrderStatus.map(createOrderStatus))
+    console.log("Finished creating orderStatuses")
+    console.log(statuses)
+  } catch (error) {
+    console.log("Error creating initial Orders")
+    console.error(error)
+    throw error
+  }
+}
+
 async function rebuildDB() {
   try {
     client.connect();
     await dropTables();
     await createTables();
     await createInitialProducts();
-    await createInitialUsers()
+    await createInitialUsers();
+    await createInitialOrders();
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;
@@ -199,10 +215,3 @@ async function rebuildDB() {
 rebuildDB()
   .catch(console.error)
   .finally(() => client.end());
-
-module.exports = {
-  // dropTables,
-  // createTables,
-  // rebuildDB,
-  // createInitialProducts
-};
