@@ -11,11 +11,13 @@ const {
   seedOrderStatus,
   createOrderStatus,
   seedInitalOrders,
-  createNewOrder
+  createNewOrder,
+  createConsoles,
+  consolesToCreate,
   // other db methods
 } = require("./");
 
-const { client } = require("./client")
+const { client } = require("./client");
 
 async function dropTables() {
   console.log("Dropping All Tables...");
@@ -163,6 +165,10 @@ async function createInitialProducts() {
     const products = await Promise.all(productsToCreate.map(createProduct));
     console.log("Products created");
     console.log(products);
+    console.log("Starting to create consoles");
+    const consoles = await Promise.all(consolesToCreate.map(createConsoles));
+    console.log("Consoles created");
+    console.log("consoles");
   } catch (error) {
     console.error("Error creating initial products");
     throw error;
@@ -173,34 +179,34 @@ async function createInitialUsers() {
   try {
     //Need to create the roles table 1st before adding Users
     console.log("Starting to create initial Users Roles...");
-    const roles = await Promise.all(seedRoles.map(createRole))
-    console.log("Finished creating roles")
-    console.log(roles)
+    const roles = await Promise.all(seedRoles.map(createRole));
+    console.log("Finished creating roles");
+    console.log(roles);
     console.log("Starting to create initial Users...");
     const users = await Promise.all(seedUsers.map(createUser));
     console.log("Users Created", users);
   } catch (error) {
-    console.log("Error creating initial Users")
-    console.error(error)
-    throw error
+    console.log("Error creating initial Users");
+    console.error(error);
+    throw error;
   }
 }
 
 async function createInitialOrders() {
   try {
-    console.log("Starting to create orderStatus")
-    const statuses = await Promise.all(seedOrderStatus.map(createOrderStatus))
-    console.log("Finished creating orderStatuses")
-    console.log(statuses)
+    console.log("Starting to create orderStatus");
+    const statuses = await Promise.all(seedOrderStatus.map(createOrderStatus));
+    console.log("Finished creating orderStatuses");
+    console.log(statuses);
 
-    console.log("Starting to create orders")
-    const orders = await Promise.all(seedInitalOrders.map(createNewOrder))
-    console.log("Finished creating orders")
-    console.log(orders)
+    console.log("Starting to create orders");
+    const orders = await Promise.all(seedInitalOrders.map(createNewOrder));
+    console.log("Finished creating orders");
+    console.log(orders);
   } catch (error) {
-    console.log("Error creating initial Orders")
-    console.error(error)
-    throw error
+    console.log("Error creating initial Orders");
+    console.error(error);
+    throw error;
   }
 }
 

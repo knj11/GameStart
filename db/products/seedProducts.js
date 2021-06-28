@@ -144,4 +144,25 @@ const productsToCreate = [
   },
 ];
 
-module.exports = { productsToCreate };
+const consolesToCreate = [
+  {
+    description: "Playstation 5",
+  },
+  {
+    description: "Playstation 4",
+  },
+  {
+    description: "Xbox Series X|S",
+  },
+  {
+    description: "Xbox One",
+  },
+  {
+    description: "Nintendo Switch",
+  },
+  {
+    description: "PC",
+  },
+];
+
+module.exports = { productsToCreate, consolesToCreate };
