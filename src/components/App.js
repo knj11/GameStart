@@ -18,13 +18,15 @@ const App = () => {
   const [products, setProducts] = useState(false)
   const [user, setUser] = useLocalStorage("user", "")
 
+  const isAdmin = () => (user.roleId === 1)
+
   useEffect(() => {
     fetchAllProducts()
       .then((response) => setProducts(response))
       .catch((error) => console.log("Request Not Made"))
   }, [])
 
-  const renderProductCards = (products) => (products) && products.map((product) => <GameCard product={product} />)
+  const renderProductCards = (products) => (products) && products.map((product) => <GameCard product={product} isAdmin={isAdmin} />)
 
   return (
     <>
