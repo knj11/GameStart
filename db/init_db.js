@@ -15,7 +15,9 @@ const {
   createConsoles,
   consolesToCreate,
   seedOrderItems,
-  addItem
+  addItem,
+  seedModifiedOrderStatuses,
+  updateOrderStatus
   // other db methods
 } = require("./");
 
@@ -229,6 +231,22 @@ async function createInitialCartItems() {
   }
 }
 
+//seed db with different types of order Statuses
+async function changeOrderStatus() {
+  try {
+    console.log("modifying the Orders Table statuses")
+    await Promise.all(seedModifiedOrderStatuses.map(updateOrderStatus))
+    console.log("Updated Orders Table with new Statuses")
+    const { rows: newOrdersStatus } = await client.query(`SELECT * FROM orders;`)
+    console.log(newOrdersStatus)
+
+  } catch (error) {
+    console.log("Error changing OrderStatus")
+    console.error(error)
+    throw error
+  }
+}
+
 async function rebuildDB() {
   try {
     client.connect();
@@ -238,6 +256,7 @@ async function rebuildDB() {
     await createInitialUsers();
     await createInitialOrders();
     await createInitialCartItems();
+    await changeOrderStatus();
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;

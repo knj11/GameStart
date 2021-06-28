@@ -5,8 +5,8 @@ const seedOrderStatus = [
       "Customer is adding products to Shopping Cart but has not placed order yet",
   },
   {
-    name: "Order Placed",
-    description: "Customer has placed an order for all items in their shopping cart",
+    name: "Completed",
+    description: "Customer has placed an order for all items in thier shopping cart"
   },
   {
     name: "Deleted",
@@ -101,7 +101,22 @@ const seedOrderItems = [
     orderId: 6,
     userId: 6
   },
+]
+
+const seedModifiedOrderStatuses = [
+  {
+    orderId: 2,
+    "orderStatusId": 2
+  },
+  {
+    orderId: 1,
+    "orderStatusId": 3
+  },
+  {
+    orderId: 4,
+    "orderStatusId": 2
+  },
 
 ]
 
-module.exports = { seedOrderStatus, seedInitalOrders, seedOrderItems }
+module.exports = { seedOrderStatus, seedInitalOrders, seedOrderItems, seedModifiedOrderStatuses }
