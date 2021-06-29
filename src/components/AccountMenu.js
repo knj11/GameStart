@@ -8,7 +8,7 @@ const AccountMenu = ({ setUser }) => {
   const handleClick = (e) => setAnchorEl(e.currentTarget)
   const handleClose = () => setAnchorEl(null)
 
-  const handleSignOut = () => setUser('')
+  const handleSignOut = () => setUser({ id: '', roleId: '' })
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core"
+import { Grid, IconButton } from "@material-ui/core"
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { makeStyles } from "@material-ui/core/styles"
 
 import { GameCard, NavBar, AuthDialog } from "./index"
@@ -11,14 +12,19 @@ const useStyles = makeStyles({
   gridContainer: {
     padding: "18px"
   },
+  addButton: {
+    position: "fixed",
+    bottom: '30px',
+    right: '15px',
+  }
 })
 
 const App = () => {
   const classes = useStyles()
   const [products, setProducts] = useState(false)
-  const [user, setUser] = useLocalStorage("user", "")
+  const [user, setUser] = useLocalStorage("user", { id: '', roleId: '' })
 
-  const isAdmin = () => (user.roleId === 1)
+  const isAdmin = (user.roleId === 1)
 
   useEffect(() => {
     fetchAllProducts()
@@ -34,9 +40,13 @@ const App = () => {
       <Grid container spacing={3} className={classes.gridContainer}>
         {renderProductCards(products)}
       </Grid>
+      {(isAdmin) && 
+        <IconButton className={classes.addButton} color="primary" >
+          <AddCircleIcon style={{fontSize: 50}} />
+        </IconButton>
+      }
     </>
   )
-
 }
 
 export default App
