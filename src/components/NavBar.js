@@ -15,6 +15,7 @@ const NavBar = ({ user, setUser }) => {
   const classes = useStyles()
 
 
+
   return (
     <AppBar position="sticky">
       <Toolbar className={classes.flex}>
@@ -22,7 +23,7 @@ const NavBar = ({ user, setUser }) => {
           GameStart
         </Typography>
         <div>
-          {(user) ? <AccountMenu setUser={setUser} /> : <AuthDialog setUser={setUser} />}
+          {(user.id) ? <AccountMenu setUser={setUser} /> : <AuthDialog setUser={setUser} />}
           {/* <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
             <MenuItem>Sign-up</MenuItem>
             <MenuItem>Log-In</MenuItem>
