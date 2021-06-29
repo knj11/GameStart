@@ -6,8 +6,8 @@ async function createProduct({ id, title, description, picture, unitPrice }) {
       rows: [product],
     } = await client.query(
       /*sql*/ `
-        INSERT INTO products( title, description,  picture,"unitPrice")
-        VALUES ($1, $2, $3,$4)
+        INSERT INTO products( title, description,  picture, "unitPrice")
+        VALUES ($1, $2, $3, $4)
         RETURNING *;
       `,
       [title, description, picture, unitPrice]
