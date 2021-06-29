@@ -31,7 +31,7 @@ async function login(req, res, next) {
     delete validUser.hashedPassword
 
     res.send({
-      user: validUser,
+      ...validUser,
       message: "you're logged in!",
       token,
     });
