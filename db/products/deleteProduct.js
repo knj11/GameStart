@@ -18,7 +18,7 @@ async function deleteProduct(id) {
     }
   }
 
-//module.exports = { deleteProduct };
+module.exports = { deleteProduct };
 
 
 
