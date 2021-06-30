@@ -4,4 +4,5 @@ module.exports = {
   ...require("./getAllProducts"),
   ...require("./createConsoles"),
   ...require("./getUnitPrice"),
+  ...require("./createInitialInventory"),
 };

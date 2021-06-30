@@ -165,4 +165,163 @@ const consolesToCreate = [
   },
 ];
 
-module.exports = { productsToCreate, consolesToCreate };
+const initialInventory = [
+  {
+    quantity: 12,
+    productId: 1,
+    consoleId: 5,
+    description: "SuperMario Cart for Switch",
+  },
+  {
+    quantity: 16,
+    productId: 2,
+    consoleId: 1,
+    description: "Grand Theft Auto: Vice City for PS5",
+  },
+  {
+    quantity: 2,
+    productId: 2,
+    consoleId: 2,
+    description: "Grand Theft Auto: Vice City for PS4",
+  },
+  {
+    quantity: 10,
+    productId: 2,
+    consoleId: 3,
+    description: "Grand Theft Auto: Vice City for Xbox Series X|S",
+  },
+  {
+    quantity: 14,
+    productId: 2,
+    consoleId: 4,
+    description: "Grand Theft Auto: Vice City for XBox One",
+  },
+  {
+    quantity: 7,
+    productId: 3,
+    consoleId: 1,
+    description: "LA Noire for PS5",
+  },
+  {
+    quantity: 5,
+    productId: 3,
+    consoleId: 2,
+    description: "LA Noire for PS4",
+  },
+  {
+    quantity: 1,
+    productId: 3,
+    consoleId: 3,
+    description: "LA Noire for Xbox Series X|S",
+  },
+  {
+    quantity: 10,
+    productId: 3,
+    consoleId: 4,
+    description: "LA Noire for Xbox One",
+  },
+  {
+    quantity: 3,
+    productId: 3,
+    consoleId: 5,
+    description: "LA Noire for Switch",
+  },
+  {
+    quantity: 19,
+    productId: 4,
+    consoleId: 1,
+    description: "Fortnite for PS5",
+  },
+  {
+    quantity: 5,
+    productId: 4,
+    consoleId: 2,
+    description: "Fortnite for PS4",
+  },
+  {
+    quantity: 8,
+    productId: 4,
+    consoleId: 3,
+    description: "Fortnite for Xbox Series X|S",
+  },
+  {
+    quantity: 7,
+    productId: 4,
+    consoleId: 4,
+    description: "Fortnite for Xbox One",
+  },
+  {
+    quantity: 2,
+    productId: 4,
+    consoleId: 5,
+    description: "Fortnite for Switch",
+  },
+  {
+    quantity: 5,
+    productId: 5,
+    consoleId: 1,
+    description: "The Legend of Zelda: Ocarina of Time for Switch",
+  },
+  {
+    quantity: 10,
+    productId: 6,
+    consoleId: 1,
+    description: "Tony Hawk's Pro Skater 2 for PS5",
+  },
+  {
+    quantity: 8,
+    productId: 6,
+    consoleId: 2,
+    description: "Tony Hawk's Pro Skater 2 for PS4",
+  },
+  {
+    quantity: 5,
+    productId: 6,
+    consoleId: 3,
+    description: "Tony Hawk's Pro Skater 2 for Xbox Series X|S",
+  },
+  {
+    quantity: 9,
+    productId: 6,
+    consoleId: 4,
+    description: "Tony Hawk's Pro Skater 2 for Xbox One",
+  },
+  {
+    quantity: 13,
+    productId: 6,
+    consoleId: 5,
+    description: "Tony Hawk's Pro Skater 2 for Nintendo Switch",
+  },
+  {
+    quantity: 12,
+    productId: 6,
+    consoleId: 6,
+    description: "Tony Hawk's Pro Skater 2 for PC",
+  },
+  {
+    quantity: 12,
+    productId: 7,
+    consoleId: 1,
+    description: "Grand Theft Auto IV for PS5",
+  },
+  {
+    quantity: 1,
+    productId: 7,
+    consoleId: 2,
+    description: "Grand Theft Auto IV for PS4",
+  },
+  {
+    quantity: 5,
+    productId: 7,
+    consoleId: 3,
+    description: "Grand Theft Auto IV for Xbox Series X|S",
+  },
+  {
+    quantity: 10,
+    productId: 7,
+    consoleId: 4,
+    description: "Grand Theft Auto IV for Xbox One",
+  },
+];
+
+module.exports = { productsToCreate, consolesToCreate, initialInventory };
