@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardHeader, Grid, Typography, CardActions, IconButton } from "@material-ui/core"
+import { Card, CardContent, CardHeader, Grid, Typography, CardActions, IconButton, CardMedia } from "@material-ui/core"
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/core/styles"
@@ -8,9 +8,9 @@ const useStyles = makeStyles({
   gridContainer: {
     padding: "18px"
   },
-  cardHeight: {
-    height: "300px"
-  },
+  // cardHeight: {
+  //   height: "500px"
+  // },
   scroll: {
     //make sure to consider parent "contanter" when setting height. If larger the box wont scroll
     overflow: "auto",
@@ -25,6 +25,7 @@ const GameCard = ({ product, isAdmin }) => {
     <Grid item xs={12} sm={6} md={4}>
       <Card key={product.id} elevation={2} className={classes.cardHeight}>
         <CardHeader title={product.title} subheader={product.unitPrice} />
+        <CardMedia style={{height: '100%', width:'100%'}} image={product.picture} title='Video Game' />
         <CardContent className={classes.scroll}>
           <Typography >
             Description:
