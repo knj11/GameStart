@@ -4,4 +4,5 @@ module.exports = {
   ...require("./createRole"),
   ...require("./getUser"),
   ...require("./seed"),
+  ...require("./getUserById"),
 };
