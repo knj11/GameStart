@@ -3,12 +3,9 @@ const productsRouter = express.Router();
 const { 
   getAllProducts,
   createProduct,
-  //updateProduct,
-  //deleteProduct
+  updateProduct,
+  deleteProduct
 } = require("../db");
-const createProduct = require("../db/products/createProduct");
-const deleteProduct = require("../db/products/deleteProduct");
-const updateProduct = require("../db/products/updateProduct");
 
 productsRouter.use((req, res, next) => {
   console.log("A request is being made to /products");

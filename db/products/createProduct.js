@@ -1,6 +1,6 @@
 const { client } = require("../client");
 
-async function createProduct({ id, title, description, picture, unitPrice }) {
+async function createProduct({ title, description, picture, unitPrice }) {
   try {
     const {
       rows: [product],
