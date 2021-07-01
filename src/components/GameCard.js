@@ -78,8 +78,8 @@ const GameCard = ({ products, setShoppingCart, shoppingCart }) => {
           quantity: 1,
           description: product.description,
           price: product.unitPrice,
-          user: user,
-          orderDate: new Date().lo,
+          sessionId: sessionId,
+          orderDate: new Date().toLocaleDateString(),
         });
 
         setShoppingCart((scp) => [
