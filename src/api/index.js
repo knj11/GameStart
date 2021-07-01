@@ -1,1 +1,2 @@
-export { fetchAllProducts } from './fetchAllProducts'
+export { fetchAllProducts } from "./fetchAllProducts";
+export { fetchUserCart } from "./fetchUserCart.js";
