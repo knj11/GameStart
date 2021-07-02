@@ -55,7 +55,7 @@ const seedUsers = [
   {
     firstName: "Jane",
     lastName: "Doe",
-    email: "john.doe@aol.com",
+    email: "john1.doe@aol.com",
     password: "password123",
     roleId: 1,
   },

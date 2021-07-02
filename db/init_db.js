@@ -20,6 +20,7 @@ const {
   updateOrderStatus,
   addInventory,
   initialInventory,
+  getItemFromInventory,
   // other db methods
 } = require("./");
 
@@ -55,10 +56,10 @@ async function createTables() {
     await client.query(/*sql*/ `
     CREATE TABLE "inventory" (
       "id" SERIAL PRIMARY KEY,
-      "quantity" int,
+      "quantity" int check( "quantity">0),
       "productId" int,
       "consoleId" int,
-      "description" varchar
+      "description" varchar 
     );
 
     CREATE TABLE "ordersItem" (
@@ -74,7 +75,7 @@ async function createTables() {
       "totalAmount" decimal DEFAULT 0.00,
       "statusDate" timestamp DEFAULT CURRENT_TIMESTAMP,
       "orderStatusId" int DEFAULT 1,
-      "userId" int NOT NULL,
+      "userId" int NOT NULL DEFAULT 9999, --9999 - anonymous user
       "sessionId" varchar(36) UNIQUE 
      );
 
@@ -82,7 +83,7 @@ async function createTables() {
       "id" SERIAL PRIMARY KEY,
       "firstName" varchar,
       "lastName" varchar,
-      "email" varchar,
+      "email" varchar UNIQUE,
       "hashedPassword" varchar,
       "roleId" int
     );
@@ -223,7 +224,9 @@ async function createInitialCartItems() {
     console.log(items);
 
     console.log("Show Orders table with new Totals");
-    const { rows: newOrdersTotal } = await client.query(`SELECT * FROM orders;`);
+    const { rows: newOrdersTotal } = await client.query(
+      `SELECT * FROM orders;`
+    );
     console.log(newOrdersTotal);
   } catch (error) {
     console.log("Error creating initial Cart Items");
@@ -238,7 +241,9 @@ async function changeOrderStatus() {
     console.log("modifying the Orders Table statuses");
     await Promise.all(seedModifiedOrderStatuses.map(updateOrderStatus));
     console.log("Updated Orders Table with new Statuses");
-    const { rows: newOrdersStatus } = await client.query(`SELECT * FROM orders;`);
+    const { rows: newOrdersStatus } = await client.query(
+      `SELECT * FROM orders;`
+    );
     console.log(newOrdersStatus);
   } catch (error) {
     console.log("Error changing OrderStatus");
