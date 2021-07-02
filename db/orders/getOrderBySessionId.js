@@ -1,5 +1,5 @@
 const { client } = require("../client");
-const { createCartStructure } = require("./");
+const { createCartStructure } = require("./createCartStructure");
 
 async function getOrderBySessionId(sessionId) {
   try {

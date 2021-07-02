@@ -5,7 +5,7 @@ function createCartStructure(arrayedOrders) {
     arrayedOrders.forEach((order) => {
       if (!cart.find((o) => o.orderId == order.orderId)) {
         let { orderId, userId, sessionId } = order;
-        tempArray = arrayedOrders.filter((o) => o.orderId == order.id);
+        tempArray = arrayedOrders.filter((o) => o.orderId == order.orderId);
         let items = [];
         tempArray.forEach((o) => {
           items.push({
