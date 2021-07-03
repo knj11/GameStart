@@ -13,7 +13,7 @@ import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import Button from "@material-ui/core/Button";
 import { CenterFocusStrong } from "@material-ui/icons";
 
-import {createCart} from '../api'
+import {createCart,addItemToOrder} from '../api'
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -84,6 +84,7 @@ const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
           price: product.unitPrice,
           sessionId: sessionId,
           orderDate: new Date().toLocaleDateString(),
+          inventoryId:product.inventoryId
         });
 
         console.log(cart);
@@ -92,26 +93,31 @@ const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
       }
 
       const tempProduct =
-        shoppingCart.length > 0 &&
-        shoppingCart.filter((p) => p.id == product.id);
+        shoppingCart.Items?.length > 0 &&
+        shoppingCart.Items?.filter((p) => p.inventoryId == product.inventoryId);
 
+        console.log(shoppingCart.orderId);
       if (!tempProduct || tempProduct.length == 0) {
-        await addItemToOrder(shoppingCart.orderId, {
+        const addedItem= await addItemToOrder( {
+          productId: product.id,
+          quantity: 1,
+          description: product.description,
+          unitPrice: product.price,
+          orderId:shoppingCart.orderId,
+          inventoryId:product.inventoryId
+        });
+        
+        const tShoppingCart={...shoppingCart};
+
+        tShoppingCart.Items.push({
           id: product.id,
           quantity: 1,
           description: product.description,
           price: product.price,
-        });
-
-        setShoppingCart((scp) => [
-          {
-            id: product.id,
-            quantity: 1,
-            description: product.description,
-            price: product.price,
-          },
-          ...scp,
-        ]);
+          orderId:addedItem.orderId,
+          inventoryId:product.inventoryId
+        })
+        setShoppingCart( tShoppingCart);
 
         return;
       }
@@ -153,9 +159,9 @@ const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
       {products &&
         products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card key={product.id} elevation={2} className={classes.cardHeight}>
+            <Card key={product.inventoryId} elevation={2} className={classes.cardHeight}>
               <CardHeader
-                title={product.title}
+                title={product.title+'-'+product.inventoryDescription}
                 subheader={product.unitPrice}
               ></CardHeader>
 

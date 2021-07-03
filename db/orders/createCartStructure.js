@@ -17,6 +17,8 @@ function createCartStructure(arrayedOrders) {
             title: o.title,
             description: o.description,
             picture: o.picture,
+            inventoryId:o.inventoryId,
+            inventoryDescription:o.inventoryDescription
           });
         });
         cart.push({

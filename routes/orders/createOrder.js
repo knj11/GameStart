@@ -8,8 +8,8 @@ const {
 async function createOrder(req, res, next) {
   try {
     const userId = req.user ? req.user : 21;
-    const { price: unitPrice, quantity, sessionId, productId } = req.body;
-    const inventory = await getItemFromInventory(2);
+    const { price: unitPrice, quantity, sessionId, productId ,inventoryId} = req.body;
+    const inventory = await getItemFromInventory(inventoryId);
     console.log(inventory);
     if (!inventory) {
       throw Error("Out of Stock");

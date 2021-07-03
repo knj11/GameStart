@@ -6,16 +6,18 @@ export async function createCart ({productId,
     description,
     price,
     sessionId,
-    orderDate}){
+    orderDate,
+inventoryId}){
 
     try {
         const cart = await axios.post('api/orders',{
-        productId,
+          productId,
           quantity,
           description,
           price,
           sessionId,
-          orderDate
+          orderDate,
+          inventoryId
     })
 
 

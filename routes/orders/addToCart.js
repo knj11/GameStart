@@ -2,30 +2,15 @@ const { getItemFromInventory, addItem, addToOrderTotal } = require("../../db");
 async function addToCart(req, res, next) {
   try {
     const userId = req.user ? req.user : 21;
-    const { price: unitPrice, quantity, sessionId, productId } = req.body;
+    const { price: unitPrice, quantity, sessionId, productId,inventoryId } = req.body;
     const { orderId } = req.params;
-    const inventory = await getItemFromInventory(9); //how do we get the inventoryId?
+    const inventory = await getItemFromInventory(inventoryId); //how do we get the inventoryId?
     if (!inventory) {
       throw Error("Out of Stock");
     }
-
-    const updateCart = await addItem({ productId, orderId, quantity, unitPrice });
-    const cart = {};
-    cart.sessionId = sessionId;
-    cart.userId = userId;
-    cart.items = [
-      {
-        productId: updateCart.productId,
-        itemId: updateCart.id,
-        quantity: updateCart.quantity,
-        unitPrice: updateCart.unitPrice,
-      },
-    ];
-    console.log("unitPrice:", unitPrice);
-
+    const newItem = await addItem({ productId, orderId, quantity, unitPrice });
     await addToOrderTotal(unitPrice, orderId);
-
-    res.send(cart);
+    res.send(newItem);
   } catch (error) {
     console.log(error);
     const { code, message } = error;
