@@ -32,13 +32,13 @@ const App = () => {
       .catch((error) => console.log("Request Not Made"));
   }, []);
 
-  useEffect(() => {
-    fetchUserCart({ user, sessionId })
-      .then((response) => {
-        setShoppingCart(response);
-      })
-      .catch(console.error);
-  }, []);
+  // useEffect(() => {
+  //   fetchUserCart({ user, sessionId })
+  //     .then((response) => {
+  //       setShoppingCart(response);
+  //     })
+  //     .catch(console.error);
+  // }, []);
   // const renderProductCards = (products) =>
   //   products &&
   // products.map((product) => (

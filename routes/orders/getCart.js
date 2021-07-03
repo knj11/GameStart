@@ -1,10 +1,8 @@
 const { getOrderBySessionId } = require("../../db");
 
-async function createCart(req, res, next) {
+async function getCart(req, res, next) {
   try {
-    console.log(req.body);
     const sessionId = req.body.sessionId;
-    console.log(sessionId);
     const user = req.user;
     const order = await getOrderBySessionId(sessionId);
 
@@ -14,7 +12,7 @@ async function createCart(req, res, next) {
   }
 }
 
-module.exports = createCart;
+module.exports = getCart;
 
 /*
 {

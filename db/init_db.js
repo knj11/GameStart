@@ -56,7 +56,7 @@ async function createTables() {
     await client.query(/*sql*/ `
     CREATE TABLE "inventory" (
       "id" SERIAL PRIMARY KEY,
-      "quantity" int check( "quantity">0),
+      "quantity" int check( "quantity">-1),
       "productId" int,
       "consoleId" int,
       "description" varchar 
@@ -224,9 +224,7 @@ async function createInitialCartItems() {
     console.log(items);
 
     console.log("Show Orders table with new Totals");
-    const { rows: newOrdersTotal } = await client.query(
-      `SELECT * FROM orders;`
-    );
+    const { rows: newOrdersTotal } = await client.query(`SELECT * FROM orders;`);
     console.log(newOrdersTotal);
   } catch (error) {
     console.log("Error creating initial Cart Items");
@@ -241,9 +239,7 @@ async function changeOrderStatus() {
     console.log("modifying the Orders Table statuses");
     await Promise.all(seedModifiedOrderStatuses.map(updateOrderStatus));
     console.log("Updated Orders Table with new Statuses");
-    const { rows: newOrdersStatus } = await client.query(
-      `SELECT * FROM orders;`
-    );
+    const { rows: newOrdersStatus } = await client.query(`SELECT * FROM orders;`);
     console.log(newOrdersStatus);
   } catch (error) {
     console.log("Error changing OrderStatus");
