@@ -20,7 +20,7 @@ const App = () => {
   const classes = useStyles();
   const [products, setProducts] = useState(false);
   const [user, setUser] = useLocalStorage("user", "");
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState({});
   const [sessionId] = useLocalStorage("sessionId", generateSessionId());
 
   useEffect(() => {
@@ -32,13 +32,16 @@ const App = () => {
       .catch((error) => console.log("Request Not Made"));
   }, []);
 
-  // useEffect(() => {
-  //   fetchUserCart({ user, sessionId })
-  //     .then((response) => {
-  //       setShoppingCart(response);
-  //     })
-  //     .catch(console.error);
-  // }, []);
+  useEffect(() => {
+    fetchUserCart({ user, sessionId })
+      .then(({data}) => {
+        const [cart]=data
+        console.log(cart);
+        setShoppingCart(cart);
+       scrollBy
+      })
+      .catch(console.error);
+  }, []);
   // const renderProductCards = (products) =>
   //   products &&
   // products.map((product) => (

@@ -1,8 +1,11 @@
 import axios from "axios";
 
-export function fetchUserCart({ user, sessionId }) {
-  Promise.resolve([]);
-  //return axios.get(`api/orders/${sessionId}`)
+export async function fetchUserCart({ user, sessionId }) {
+  //Promise.resolve([]);
+  
+  
+  
+  return axios.get(`api/orders/${sessionId}`)
 }
 
 /*

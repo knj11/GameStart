@@ -14,6 +14,7 @@ async function addItem({ productId, orderId, quantity,unitPrice }) {
     );
 
     return item;
+    console.log(item);
   } catch (error) {
     throw error;
   }

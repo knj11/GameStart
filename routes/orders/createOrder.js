@@ -27,6 +27,7 @@ async function createOrder(req, res, next) {
     console.log("update cart:", updateCart);
     const cart = {};
     cart.sessionId = sessionId;
+    cart.orderId=orderId
     cart.userId = userId;
     cart.items = [
       {

@@ -13,6 +13,8 @@ import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import Button from "@material-ui/core/Button";
 import { CenterFocusStrong } from "@material-ui/icons";
 
+import {createCart} from '../api'
+
 const useStyles = makeStyles({
   gridContainer: {
     padding: "18px",
@@ -65,16 +67,18 @@ const useStyles = makeStyles({
   },
 });
 
-const GameCard = ({ products, setShoppingCart, shoppingCart }) => {
+const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
   const classes = useStyles();
 
   async function handleAddToShoppingCart(product) {
     try {
       //await addProductToCart(shoppingCart);
 
-      if (shoppingCart && shoppingCart.length == 0) {
-        const { cart } = await addProductToCart({
-          id: product.id,
+      console.log(!shoppingCart.orderId)
+
+      if (!shoppingCart.orderId) {
+        const  {data:cart}  = await createCart({
+          productId: product.id,
           quantity: 1,
           description: product.description,
           price: product.unitPrice,
@@ -82,15 +86,8 @@ const GameCard = ({ products, setShoppingCart, shoppingCart }) => {
           orderDate: new Date().toLocaleDateString(),
         });
 
-        setShoppingCart((scp) => [
-          {
-            id: product.id,
-            quantity: 1,
-            description: product.description,
-            price: product.price,
-          },
-          ...scp,
-        ]);
+        console.log(cart);
+        setShoppingCart({...cart});
         return;
       }
 

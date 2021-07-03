@@ -11,7 +11,7 @@ ordersRouter.use((req, res, next) => {
   next();
 });
 
-ordersRouter.get("/", getCart);
+ordersRouter.get("/:sessionId", getCart);
 ordersRouter.post("/", createOrder);
 ordersRouter.post("/:orderId/orderItems", addToCart);
 ordersRouter.patch("/orders/orderItems/:orderItemId", updateQuantity);

@@ -39,7 +39,11 @@ const NavBar = ({ user, setUser, shoppingCart }) => {
   const classes = useStyles();
 
   function getItemsCount() {
-    const numberOfItems = shoppingCart.reduce((acc, p) => +p.quantity + acc, 0);
+    const {Items:items}=shoppingCart
+    
+   if(!items) return
+  
+    const numberOfItems = items.reduce((acc, p) => +p.quantity + acc, 0);
     return numberOfItems;
   }
   return (
@@ -47,12 +51,13 @@ const NavBar = ({ user, setUser, shoppingCart }) => {
       <Toolbar className={classes.flex}>
         <Typography variant="h6">GameStart</Typography>
         <div className={classes.cartContainer}>
-          {shoppingCart && shoppingCart.length > 0 ? (
+          {console.log(shoppingCart?.Items)}
+          {shoppingCart && shoppingCart?.Items?.length > 0 ? (
             <>
               <ShoppingCartIcon className={classes.shoppingCartCount} />
-              {console.log(shoppingCart)}
+            
               <span className={classes.shoppingCartCountNotifier}>
-                {shoppingCart.length > 0 && getItemsCount()}
+                {getItemsCount()}
               </span>
             </>
           ) : (

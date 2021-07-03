@@ -2,7 +2,8 @@ const { getOrderBySessionId } = require("../../db");
 
 async function getCart(req, res, next) {
   try {
-    const sessionId = req.body.sessionId;
+    const {sessionId} = req.params;
+    console.log(sessionId)
     const user = req.user;
     const order = await getOrderBySessionId(sessionId);
 
