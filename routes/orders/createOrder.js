@@ -1,15 +1,15 @@
 const {
-  getOrderBySessionId,
   createNewOrder,
   getItemFromInventory,
   addItem,
+  getOrderBySessionId,
 } = require("../../db");
 
 async function createOrder(req, res, next) {
   try {
     const userId = req.user ? req.user : 21;
     const { price: unitPrice, quantity, sessionId, productId } = req.body;
-    const inventory = await getItemFromInventory(1);
+    const inventory = await getItemFromInventory(2);
     console.log(inventory);
     if (!inventory) {
       throw Error("Out of Stock");
@@ -19,6 +19,10 @@ async function createOrder(req, res, next) {
       sessionId,
       totalAmount: unitPrice,
     });
+
+    const orderItemId = getOrderBySessionId(sessionId);
+    console.log("orderItemId:", orderItemId);
+
     const updateCart = await addItem({ productId, orderId, quantity, unitPrice });
     console.log("update cart:", updateCart);
     const cart = {};
