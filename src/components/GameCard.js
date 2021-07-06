@@ -21,15 +21,22 @@ const useStyles = makeStyles({
   }
 })
 
-const GameCard = ({ product, isAdmin }) => {
+const GameCard = ({ product, isAdmin, user, setProducts }) => {
   const classes = useStyles()
 
   const [editMode, setEditMode] = useState(false)
 
   const handleDelete = async () => {
+    const token = user.token
     const productId = product.id
     try {
-      const res = await deleteProduct(productId)
+      const res = await deleteProduct(productId, token)
+      if (res) {
+
+        setProducts(products => {
+          return [...products].filter(el => el.id !== productId)
+        })
+      }
     } catch (error) {
       console.log("Trouble Deleting Product")
       console.dir(error)

@@ -7,7 +7,8 @@ async function deleteProduct(id) {
           } =
       await client.query(
         /*sql*/ `
-          DELETE FROM products WHERE id=$1;
+          DELETE FROM products WHERE id=$1
+          RETURNING *;
           `,
         [id]
       );

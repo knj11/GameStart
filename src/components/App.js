@@ -32,7 +32,7 @@ const App = () => {
       .catch((error) => console.log("Request Not Made"))
   }, [])
 
-  const renderProductCards = (products) => (products) && products.map((product) => <GameCard product={product} isAdmin={isAdmin} />)
+  const renderProductCards = (products) => (products) && products.map((product) => <GameCard setProducts={setProducts} user={user} product={product} isAdmin={isAdmin} />)
 
   return (
     <>

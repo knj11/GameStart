@@ -58,14 +58,16 @@ productsRouter.put('/', async (req, res, next) => {
 productsRouter.delete('/', async (req, res, next) => {
 	try {
     //ensure that the user has admin rights
-    if (req.user.role !== 1) throw "user is not an administrator"
-		const { id } = req.params;
+    if (req.user.role === 1) throw "user is not an administrator"
+		const { id } = req.query;
+    console.log("This is the delete id", id)
 		
-		const getProduct = await getProductById(id);
-		if (getProduct) {
-			const deletedProduct = await deleteProduct(id);
-			res.send(deletedProduct);
-		}
+		//const getProduct = await getProductById(id);
+	//if (getProduct) {
+    const deletedProduct = await deleteProduct(id);
+    if (!deletedProduct) throw "Product was NOT deleted"
+    res.send(deletedProduct);
+		//}
 	} catch (error) {
 		next(error);
 	}
