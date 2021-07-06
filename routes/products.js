@@ -58,7 +58,7 @@ productsRouter.put('/', async (req, res, next) => {
 productsRouter.delete('/', async (req, res, next) => {
 	try {
     //ensure that the user has admin rights
-          //if (req.user.role !== 1) throw "user is not an administrator"
+    if (req.user.role !== 1) throw "user is not an administrator"
 		const { id } = req.params;
 		
 		const getProduct = await getProductById(id);

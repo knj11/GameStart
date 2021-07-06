@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/core/styles"
 
 import { CardDescription, EditCard } from './'
+import { deleteProduct } from "../api";
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -25,16 +26,26 @@ const GameCard = ({ product, isAdmin }) => {
 
   const [editMode, setEditMode] = useState(false)
 
+  const handleDelete = async () => {
+    const productId = product.id
+    try {
+      const res = await deleteProduct(productId)
+    } catch (error) {
+      console.log("Trouble Deleting Product")
+      console.dir(error)
+    }
+  }
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card key={product.id} elevation={2} className={classes.cardHeight}>
         {(!editMode) ? <CardDescription product={product} /> : <EditCard product={product} />}
         {(isAdmin) &&
           <CardActions style={{ "justifyContent": 'flex-end' }}>
-            <IconButton style={{ color: 'red' }}>
+            <IconButton style={{ color: 'red' }} onClick={handleDelete}>
               <DeleteForeverIcon />
             </IconButton>
-            <IconButton color='primary' onClick={() => setEditMode(true)}>
+            <IconButton color='primary' onClick={() => setEditMode(!editMode)}>
               <EditIcon />
             </IconButton>
           </CardActions>
