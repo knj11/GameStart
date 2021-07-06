@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, Grid, Typography, CardActions, IconButton, CardMedia } from "@material-ui/core"
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/core/styles"
+
+import { CardDescription, EditCard } from './'
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -21,25 +23,18 @@ const useStyles = makeStyles({
 const GameCard = ({ product, isAdmin }) => {
   const classes = useStyles()
 
+  const [editMode, setEditMode] = useState(false)
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card key={product.id} elevation={2} className={classes.cardHeight}>
-        <CardHeader title={product.title} subheader={product.unitPrice} />
-        <CardMedia style={{height: '100%', width:'100%'}} image={product.picture} title='Video Game' />
-        <CardContent className={classes.scroll}>
-          <Typography >
-            Description:
-          </Typography>
-          <Typography>
-            {product.description}
-          </Typography>
-        </CardContent>
+        {(!editMode) ? <CardDescription product={product} /> : <EditCard product={product} />}
         {(isAdmin) &&
-          <CardActions>
-            <IconButton>
+          <CardActions style={{ "justifyContent": 'flex-end' }}>
+            <IconButton style={{ color: 'red' }}>
               <DeleteForeverIcon />
             </IconButton>
-            <IconButton>
+            <IconButton color='primary' onClick={() => setEditMode(true)}>
               <EditIcon />
             </IconButton>
           </CardActions>

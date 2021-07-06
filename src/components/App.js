@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Grid, IconButton } from "@material-ui/core"
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { Grid, Fab } from "@material-ui/core"
+import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles"
 
-import { GameCard, NavBar, AuthDialog } from "./index"
+import { GameCard, NavBar } from "./index"
 
 import { fetchAllProducts } from '../api'
 import { useLocalStorage } from "./hooks";
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   addButton: {
     position: "fixed",
     bottom: '30px',
-    right: '15px',
+    right: '20px',
   }
 })
 
@@ -41,9 +41,9 @@ const App = () => {
         {renderProductCards(products)}
       </Grid>
       {(isAdmin) && 
-        <IconButton className={classes.addButton} color="primary" >
-          <AddCircleIcon style={{fontSize: 50}} />
-        </IconButton>
+        <Fab className={classes.addButton} color="primary" >
+          <AddIcon />
+        </Fab>
       }
     </>
   )
