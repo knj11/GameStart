@@ -6,7 +6,7 @@ const productsToCreate = [
     title: "Super Mario Kart",
     description:
       "In Super Mario Kart, the player takes control of one of eight Mario series characters, each with differing capabilities. In single player mode players can race against computer-controlled characters in multi-race cups over three difficulty levels. During the races, offensive and speed boosting power-ups can be used to gain an advantage. Alternatively players can race against the clock in a Time Trial mode. In multiplayer mode two players can simultaneously take part in the cups or can race against each other one-on-one in Match Race mode. In a third multiplayer mode – Battle Mode – the aim is to defeat the other players by attacking them with power-ups, destroying balloons which surround each kart.",
-    picture: "this is a placeholder for image",
+    picture: "https://static.wikia.nocookie.net/videogames-fanon/images/f/f7/Mario_Kart_Double_Dash%21%21_XBOX.jpg/revision/latest/scale-to-width-down/250?cb=20191209133147",
     unitPrice: 28.99,
   },
   {

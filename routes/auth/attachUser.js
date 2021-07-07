@@ -16,6 +16,7 @@ async function attachUser(req, res, next) {
         const user = await getUserById(id);
 
         req.user = user;
+        console.log("User obj was attached to req")
 
         next();
       }

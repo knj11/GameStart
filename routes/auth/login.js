@@ -25,8 +25,10 @@ async function login(req, res, next) {
     }
     const token = jwt.sign({ id: validUser.id, email: validUser.email }, JWT_SECRET);
 
+    delete validUser.hashedPassword
+
     res.send({
-      user: { id: validUser.id, email: validUser.email },
+      ...validUser,
       message: "you're logged in!",
       token,
     });

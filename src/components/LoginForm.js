@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Dialog, TextField, DialogTitle, IconButton, DialogContentText, DialogContent, Button, DialogActions, Link, Typography } from '@material-ui/core'
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import React from 'react'
+import { Button, DialogActions, Typography } from '@material-ui/core'
+import { Formik, Form } from 'formik';
 import * as yup from 'yup'
 
 import { MyTextField } from './'
@@ -41,7 +41,7 @@ const LoginForm = ({ handleClose, setUser }) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, errors, isSubmitting }) => (
+      {({ errors, isSubmitting }) => (
         <Form>
           <MyTextField placeholder="Email" name="email" type="text" />
           <MyTextField placeholder="Password" name="password" type="password" />

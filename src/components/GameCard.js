@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
+import React, { useState, useContext } from "react";
+import { Card, CardContent, CardHeader, Grid, Typography, CardActions, IconButton, CardMedia, Button } from "@material-ui/core"
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
-import Button from "@material-ui/core/Button";
 import { CenterFocusStrong } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles"
 
 import {createCart,addItemToOrder,removeItemFromOrder} from '../api'
 import { ShoppingCartContext } from './App';
+
+import { CardDescription, EditCard } from './'
+import { deleteProduct } from "../api";
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -76,12 +73,13 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     backgroundColor: "red",
     padding: "2px",
-    
   }
 });
 
+//({ product, isAdmin, user, setProducts })
 const GameCard = ({ products, sessionId }) => {
   const classes = useStyles();
+  const [editMode, setEditMode] = useState(false)
   const {shoppingCart,setShoppingCart}=useContext(ShoppingCartContext)
 
   async function handleAddToShoppingCart(product) {
@@ -133,7 +131,6 @@ const GameCard = ({ products, sessionId }) => {
 
     try {
       if (!shoppingCart && shoppingCart.Items?.length < 1) return;
-
     const tempProdct =
       shoppingCart.Items.length > 0 && shoppingCart.Items.filter((p) => p.inventoryId == product.inventoryId);
     if (!tempProdct || tempProdct.length == 0) return;
@@ -180,24 +177,49 @@ const GameCard = ({ products, sessionId }) => {
 
   }
 
+  const handleDelete = async () => {
+    const token = user.token
+    const productId = product.id
+    try {
+      const res = await deleteProduct(productId, token)
+      if (res) {
+
+        setProducts(products => {
+          return [...products].filter(el => el.id !== productId)
+        })
+      }
+    } catch (error) {
+      console.log("Trouble Deleting Product")
+      console.dir(error)
+    }
+  }
+
   return (
     <>
       {products &&
         products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.inventoryId}>
-            <Card  elevation={2} className={classes.cardHeight}>
+            <Card key={product.id} elevation={2} className={classes.cardHeight}>
               <CardHeader
                 title={product.title+'-'+product.inventoryDescription  }
                 subheader={product.unitPrice}
-                
               >
-               
               </CardHeader>
-
               <CardContent className={classes.scroll}>
                 <Typography>Description:</Typography>
                 <Typography>{product.description}</Typography>
               </CardContent>
+{/*Break the cardActions into 2 components. 1 for Admin, one for standard user. Below is Admin code*/}
+{/*{(isAdmin) &&
+          <CardActions style={{ "justifyContent": 'flex-end' }}>
+            <IconButton style={{ color: 'red' }} onClick={handleDelete}>
+              <DeleteForeverIcon />
+            </IconButton>
+            <IconButton color='primary' onClick={() => setEditMode(!editMode)}>
+              <EditIcon />
+            </IconButton>
+          </CardActions>
+        }*/}
               <CardActions className={classes.cardAction}>
                 <div className={classes.addShopingCartContainer}>
                   <Button

@@ -49,6 +49,7 @@ const NavBar = ({ user, setUser }) => {
     const numberOfItems = items.reduce((acc, p) => +p.quantity + acc, 0);
     return numberOfItems;
   }
+
   return (
     <AppBar position="sticky">
       <Toolbar className={classes.flex}>
@@ -68,11 +69,8 @@ const NavBar = ({ user, setUser }) => {
           )}
         </div>
         <div>
-          {user ? (
-            <AccountMenu setUser={setUser} />
-          ) : (
-            <AuthDialog setUser={setUser} />
-          )}
+          {(user.id) ? <AccountMenu setUser={setUser} /> : <AuthDialog setUser={setUser} />}
+
           {/* <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
             <MenuItem>Sign-up</MenuItem>
             <MenuItem>Log-In</MenuItem>

@@ -6,3 +6,6 @@ export { default as LoginForm } from "./LoginForm";
 export { default as SignUpForm } from "./SignUpForm";
 export { default as AccountMenu } from "./AccountMenu";
 export { default as MyTextField } from "./MyTextField";
+export { default as CardDescription } from "./CardDescription";
+export { default as EditCard } from "./EditCard";
+export { default as MyTextArea } from "./MyTextArea";
