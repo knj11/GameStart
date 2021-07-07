@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { AuthDialog, AccountMenu } from ".";
 import { Block } from "@material-ui/icons";
+import { ShoppingCartContext } from './App';
 
 const useStyles = makeStyles({
   flex: {
@@ -35,8 +36,10 @@ const useStyles = makeStyles({
   },
 });
 
-const NavBar = ({ user, setUser, shoppingCart }) => {
+const NavBar = ({ user, setUser }) => {
   const classes = useStyles();
+
+  const {shoppingCart} = useContext(ShoppingCartContext)
 
   function getItemsCount() {
     const {Items:items}=shoppingCart
@@ -51,7 +54,7 @@ const NavBar = ({ user, setUser, shoppingCart }) => {
       <Toolbar className={classes.flex}>
         <Typography variant="h6">GameStart</Typography>
         <div className={classes.cartContainer}>
-          {console.log(shoppingCart?.Items)}
+          
           {shoppingCart && shoppingCart?.Items?.length > 0 ? (
             <>
               <ShoppingCartIcon className={classes.shoppingCartCount} />

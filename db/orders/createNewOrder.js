@@ -15,6 +15,7 @@ async function createNewOrder({ userId,sessionId,totalAmount }) {
 
     return order;
   } catch (error) {
+    console.log('createNewOrder....',error)
     throw error;
   }
 }

@@ -30,8 +30,8 @@ async function dropTables() {
   console.log("Dropping All Tables...");
   try {
     await client.query(/*sql*/ `
-        DROP TABLE IF EXISTS inventory CASCADE;
         DROP TABLE IF EXISTS "ordersItem" CASCADE;
+        DROP TABLE IF EXISTS inventory CASCADE;
         DROP TABLE IF EXISTS orders CASCADE;
         DROP TABLE IF EXISTS reviews CASCADE;
         DROP TABLE IF EXISTS users CASCADE;
@@ -60,6 +60,7 @@ async function createTables() {
       "productId" int,
       "consoleId" int,
       "description" varchar 
+     
     );
 
     CREATE TABLE "ordersItem" (
@@ -67,7 +68,8 @@ async function createTables() {
       "quantity" int DEFAULT 1,
       "productId" int NOT NULL,
       "orderId" int NOT NULL,
-      "unitPrice" decimal default 0.00
+      "unitPrice" decimal default 0.00,
+      "inventoryId" int
     );
 
     CREATE TABLE "orders" (
@@ -147,6 +149,7 @@ async function createTables() {
     
     ALTER TABLE "ordersItem" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
     ALTER TABLE "ordersItem" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("inventoryId") REFERENCES "inventory" ("id");
     
     
     ALTER TABLE "inventory" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
@@ -269,10 +272,10 @@ async function rebuildDB() {
     await createTables();
     await createInitialProducts();
     await createInitialUsers();
+    await createInventory();
     await createInitialOrders();
     await createInitialCartItems();
     await changeOrderStatus();
-    await createInventory();
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;

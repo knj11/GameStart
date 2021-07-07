@@ -7,14 +7,15 @@ async function getOrderBySessionId(sessionId) {
       /*sql*/ `
       SELECT a.id "orderId", a."userId", a."sessionId", b.id "itemId", b.quantity, b."unitPrice", c.id "productId", c.title, c.description, c.picture ,d.id "inventoryId",d.description "inventoryDescription"
       FROM orders a
-      JOIN "ordersItem" b ON a.id = b."orderId"
-      JOIN products c ON b."productId" = c.id
-      JOIN inventory d on d."productId" =c.id
-      WHERE "sessionId"=$1;
+      LEFT JOIN "ordersItem" b ON a.id = b."orderId"
+      LEFT JOIN inventory d on d."id" =b."inventoryId"
+      LEFT JOIN products c ON d."productId" = c.id
+      WHERE "sessionId"=$1 and a."orderStatusId"=1;
       
     `,
       [sessionId]
     );
+    console.log(order)
     return createCartStructure(order);
   } catch (error) {
     throw error;

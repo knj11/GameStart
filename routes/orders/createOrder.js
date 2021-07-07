@@ -23,13 +23,13 @@ async function createOrder(req, res, next) {
     const orderItemId = getOrderBySessionId(sessionId);
     console.log("orderItemId:", orderItemId);
 
-    const updateCart = await addItem({ productId, orderId, quantity, unitPrice });
+    const updateCart = await addItem({ productId, orderId, quantity, unitPrice,inventoryId });
     console.log("update cart:", updateCart);
     const cart = {};
     cart.sessionId = sessionId;
     cart.orderId=orderId
     cart.userId = userId;
-    cart.items = [
+    cart.Items = [
       {
         productId: updateCart.productId,
         itemId: updateCart.id,

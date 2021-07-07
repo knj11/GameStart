@@ -13,6 +13,7 @@ async function addToOrderTotal(unitPrice, orderId) {
     );
     //return orderTotal
   } catch (error) {
+    console.log(error)
     throw error;
   }
 }

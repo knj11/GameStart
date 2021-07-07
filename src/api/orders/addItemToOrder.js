@@ -1,5 +1,5 @@
 import axios from "axios";
-export  function addItemToOrder(item)
+export async function addItemToOrder(item)
 {
     const {
         productId,
@@ -9,18 +9,21 @@ export  function addItemToOrder(item)
           inventoryId
 }=item;
     try {
-console.log(item);
-        const orders = axios.post(`/api/orders/${orderId}/orderItems`,{
+       
+        const {data} = await axios.post(`/api/orders/${orderId}/orderItems`,{
             productId,
             quantity,
             unitPrice,
             orderId,
             inventoryId
         })
-        return orders
+      
+        return data
         
     } catch (error) {
+        console.log('addItemToOrder...',error)
         throw error
+
         
     }
 }

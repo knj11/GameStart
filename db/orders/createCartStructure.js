@@ -7,7 +7,7 @@ function createCartStructure(arrayedOrders) {
         let { orderId, userId, sessionId } = order;
         tempArray = arrayedOrders.filter((o) => o.orderId == order.orderId);
         let items = [];
-        tempArray.forEach((o) => {
+        if(tempArray.length!==0) {tempArray.forEach((o) => {
           items.push({
             itemId: o.itemId,
             quantity: o.quantity,
@@ -20,7 +20,7 @@ function createCartStructure(arrayedOrders) {
             inventoryId:o.inventoryId,
             inventoryDescription:o.inventoryDescription
           });
-        });
+        });}
         cart.push({
           orderId,
           userId,

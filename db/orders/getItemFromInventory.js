@@ -1,3 +1,4 @@
+const { ContactsOutlined } = require("@material-ui/icons");
 const { client } = require("../client");
 async function getItemFromInventory(inventoryId) {
   try {
@@ -13,6 +14,7 @@ async function getItemFromInventory(inventoryId) {
     );
     return inventoryItem;
   } catch (error) {
+    console.log('getItemFromInventory...',error)
     throw error;
     // if (code == 23514) {
     //   throw Error({

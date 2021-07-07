@@ -8,14 +8,13 @@ const removeItemFromOrder = require("./removeItemFromOrder");
 
 ordersRouter.use((req, res, next) => {
   console.log("A request is being made to /orders");
-
   next();
 });
 
 ordersRouter.get("/:sessionId", getCart);
 ordersRouter.post("/", createOrder);
 ordersRouter.post("/:orderId/orderItems", addToCart);
-ordersRouter.delete("/orders/orderItems/:orderItemId", removeItemFromOrder);
-ordersRouter.patch("/orders/orderItems/:orderItemId", updateQuantity);
+ordersRouter.delete("/orderItems/:orderItemId", removeItemFromOrder);
+ordersRouter.patch("/orderItems/:orderItemId", updateQuantity);
 
 module.exports = ordersRouter;

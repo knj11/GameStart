@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardContent,
@@ -13,7 +13,8 @@ import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import Button from "@material-ui/core/Button";
 import { CenterFocusStrong } from "@material-ui/icons";
 
-import {createCart,addItemToOrder} from '../api'
+import {createCart,addItemToOrder,removeItemFromOrder} from '../api'
+import { ShoppingCartContext } from './App';
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -65,18 +66,27 @@ const useStyles = makeStyles({
     gridColumn: "1/1",
     justifyContent: "center",
   },
+  shoppingCartCountNotifier: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "1.2rem",
+    width: "1.2rem",
+    position: "relative",
+    borderRadius: "50%",
+    backgroundColor: "red",
+    padding: "2px",
+    
+  }
 });
 
-const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
+const GameCard = ({ products, sessionId }) => {
   const classes = useStyles();
+  const {shoppingCart,setShoppingCart}=useContext(ShoppingCartContext)
 
   async function handleAddToShoppingCart(product) {
     try {
-      //await addProductToCart(shoppingCart);
-
-      console.log(!shoppingCart.orderId)
-
-      if (!shoppingCart.orderId) {
+      if (!shoppingCart?.orderId) {
         const  {data:cart}  = await createCart({
           productId: product.id,
           quantity: 1,
@@ -87,83 +97,102 @@ const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
           inventoryId:product.inventoryId
         });
 
-        console.log(cart);
         setShoppingCart({...cart});
         return;
       }
 
-      const tempProduct =
-        shoppingCart.Items?.length > 0 &&
-        shoppingCart.Items?.filter((p) => p.inventoryId == product.inventoryId);
-
-        console.log(shoppingCart.orderId);
-      if (!tempProduct || tempProduct.length == 0) {
-        const addedItem= await addItemToOrder( {
+         const addedItem= await addItemToOrder( {
           productId: product.id,
           quantity: 1,
           description: product.description,
-          unitPrice: product.price,
+          unitPrice: product.unitPrice,
           orderId:shoppingCart.orderId,
           inventoryId:product.inventoryId
         });
-        
-        const tShoppingCart={...shoppingCart};
 
+        const tShoppingCart={...shoppingCart};
+        tShoppingCart.Items=shoppingCart.Items.filter((p) => p.inventoryId !== product.inventoryId)
         tShoppingCart.Items.push({
-          id: product.id,
-          quantity: 1,
+          productId: product.id,
+          quantity:addedItem.quantity,
           description: product.description,
-          price: product.price,
+          price: addedItem.unitPrice,
           orderId:addedItem.orderId,
-          inventoryId:product.inventoryId
+          inventoryId:product.inventoryId,
+          itemId:addedItem.id
         })
         setShoppingCart( tShoppingCart);
-
         return;
-      }
-
-      if (tempProduct && tempProduct.length > 0) {
-        await updateQuantity(shoppingCart.orderId, tempProduct[0].itemId);
-
-        tempProduct[0].quantity++;
-        setShoppingCart((scp) => [
-          ...tempProduct,
-          ...scp.filter((p) => p.id !== product.id),
-        ]);
-      }
+      
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
-  function handleRemoveFromShoppingCart(product) {
-    if (!shoppingCart && shoppingCart.length < 1) return;
+  async function handleRemoveFromShoppingCart(product) {
+
+    try {
+      if (!shoppingCart && shoppingCart.Items?.length < 1) return;
 
     const tempProdct =
-      shoppingCart.length > 0 && shoppingCart.filter((p) => p.id == product.id);
+      shoppingCart.Items.length > 0 && shoppingCart.Items.filter((p) => p.inventoryId == product.inventoryId);
     if (!tempProdct || tempProdct.length == 0) return;
 
-    if (tempProdct[0].quantity == 1) {
-      setShoppingCart((scp) => [...scp.filter((p) => p.id !== product.id)]);
-    } else {
-      tempProdct[0].quantity--;
-      setShoppingCart((scp) => [
-        ...tempProdct,
-        ...scp.filter((p) => p.id !== product.id),
-      ]);
+    let orderItemId=tempProdct[0].itemId
+    let inventoryId=product.inventoryId
+
+    const {data:removedItem}=await removeItemFromOrder({inventoryId,orderItemId})
+
+    const tShoppingCart={...shoppingCart};
+        tShoppingCart.Items=shoppingCart.Items.filter((p) => p.inventoryId !== product.inventoryId)
+     
+        if(!removedItem || removedItem.length==0){
+          setShoppingCart( tShoppingCart);
+          return
+        }
+   
+      tShoppingCart.Items.push({
+          productId: product.id,
+          quantity:removedItem.quantity,
+          description: product.description,
+          price: removedItem.unitPrice,
+          orderId:removedItem.orderId,
+          inventoryId:product.inventoryId,
+          itemId:removedItem.id
+        });
+        setShoppingCart( tShoppingCart);
+
+    } catch (error) {
+      console.log(error)
     }
+    
+  }
+
+  const getOrderCountForInvetory=(inventoryId)=>{
+
+    const {Items:items}=shoppingCart
+    
+    if(!items) return
+   
+     const numberOfItems = items.reduce((acc, p) => p.inventoryId ==inventoryId? +p.quantity + acc:acc , 0);
+     
+     return numberOfItems;
+
   }
 
   return (
     <>
       {products &&
         products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card key={product.inventoryId} elevation={2} className={classes.cardHeight}>
+          <Grid item xs={12} sm={6} md={4} key={product.inventoryId}>
+            <Card  elevation={2} className={classes.cardHeight}>
               <CardHeader
-                title={product.title+'-'+product.inventoryDescription}
+                title={product.title+'-'+product.inventoryDescription  }
                 subheader={product.unitPrice}
-              ></CardHeader>
+                
+              >
+               
+              </CardHeader>
 
               <CardContent className={classes.scroll}>
                 <Typography>Description:</Typography>
@@ -180,6 +209,11 @@ const GameCard = ({ products, setShoppingCart, shoppingCart,sessionId }) => {
                     <AddShoppingCartIcon
                       className={classes.addShoppingCartIcon}
                     />
+
+
+               {'    ' + getOrderCountForInvetory(product.inventoryId)>0?<span className={classes.shoppingCartCountNotifier}>{getOrderCountForInvetory(product.inventoryId)} </span>:''  } 
+
+             
                   </Button>
                 </div>
                 <div className={classes.removeShopingCartContainer}>

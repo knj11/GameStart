@@ -9,12 +9,15 @@ import { fetchAllProducts, fetchUserCart } from "../api";
 import { generateSessionId } from "../util";
 import { useLocalStorage } from "./hooks";
 
+
 const useStyles = makeStyles({
   gridContainer: {
     padding: "18px",
     width: "100%",
   },
 });
+
+export const ShoppingCartContext=React.createContext({})
 
 const App = () => {
   const classes = useStyles();
@@ -53,15 +56,14 @@ const App = () => {
   // ));
 
   return (
-    <Router>
-      <NavBar user={user} setUser={setUser} shoppingCart={shoppingCart} />
+    <Router>  <ShoppingCartContext.Provider value ={{shoppingCart,setShoppingCart}}>
+      <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route path="/" exact>
           <Grid container spacing={3} className={classes.gridContainer}>
+          
             <GameCard
               products={products}
-              shoppingCart={shoppingCart}
-              setShoppingCart={setShoppingCart}
               sessionId={sessionId}
             />
           </Grid>
@@ -69,7 +71,7 @@ const App = () => {
         <Route path="/cart">
           <h1>Hello World</h1>
         </Route>
-      </Switch>
+      </Switch></ShoppingCartContext.Provider>
     </Router>
   );
 };
