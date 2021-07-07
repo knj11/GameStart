@@ -8,17 +8,30 @@ const {
   createRole,
   getAllProducts,
   createUser,
+  seedOrderStatus,
+  createOrderStatus,
+  seedInitalOrders,
+  createNewOrder,
+  createConsoles,
+  consolesToCreate,
+  seedOrderItems,
+  addItem,
+  seedModifiedOrderStatuses,
+  updateOrderStatus,
+  addInventory,
+  initialInventory,
+  getItemFromInventory,
   // other db methods
 } = require("./");
 
-const { client } = require("./client")
+const { client } = require("./client");
 
 async function dropTables() {
   console.log("Dropping All Tables...");
   try {
     await client.query(/*sql*/ `
+        DROP TABLE IF EXISTS "ordersItem" CASCADE;
         DROP TABLE IF EXISTS inventory CASCADE;
-        DROP TABLE IF EXISTS "ordersDetails" CASCADE;
         DROP TABLE IF EXISTS orders CASCADE;
         DROP TABLE IF EXISTS reviews CASCADE;
         DROP TABLE IF EXISTS users CASCADE;
@@ -43,35 +56,36 @@ async function createTables() {
     await client.query(/*sql*/ `
     CREATE TABLE "inventory" (
       "id" SERIAL PRIMARY KEY,
-      "quantity" int,
+      "quantity" int check( "quantity">-1),
       "productId" int,
       "consoleId" int,
-      "description" varchar
+      "description" varchar 
+     
     );
 
-    CREATE TABLE "ordersDetails" (
+    CREATE TABLE "ordersItem" (
       "id" SERIAL PRIMARY KEY,
-      "quantity" int,
-      "productId" int,
-      "unitPrice" int,
-      "orderId" int,
-      "userId" int
+      "quantity" int DEFAULT 1,
+      "productId" int NOT NULL,
+      "orderId" int NOT NULL,
+      "unitPrice" decimal default 0.00,
+      "inventoryId" int
     );
 
     CREATE TABLE "orders" (
       "id" SERIAL PRIMARY KEY,
-      "totalAmount" decimal,
-      "orderDate" timestamp,
-      "orderStatusId" int,
-      "userId" int
-    );
-    
+      "totalAmount" decimal DEFAULT 0.00,
+      "statusDate" timestamp DEFAULT CURRENT_TIMESTAMP,
+      "orderStatusId" int DEFAULT 1,
+      "userId" int NOT NULL DEFAULT 9999, --9999 - anonymous user
+      "sessionId" varchar(36) UNIQUE 
+     );
 
     CREATE TABLE "users" (
       "id" SERIAL PRIMARY KEY,
       "firstName" varchar,
       "lastName" varchar,
-      "email" varchar,
+      "email" varchar UNIQUE,
       "hashedPassword" varchar,
       "roleId" int
     );
@@ -133,9 +147,9 @@ async function createTables() {
     ALTER TABLE "reviews" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
     
     
-    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
-    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
-    ALTER TABLE "ordersDetails" ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("orderId") REFERENCES "orders" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
+    ALTER TABLE "ordersItem" ADD FOREIGN KEY ("inventoryId") REFERENCES "inventory" ("id");
     
     
     ALTER TABLE "inventory" ADD FOREIGN KEY ("productId") REFERENCES "products" ("id");
@@ -160,6 +174,10 @@ async function createInitialProducts() {
     const products = await Promise.all(productsToCreate.map(createProduct));
     console.log("Products created");
     console.log(products);
+    console.log("Starting to create consoles");
+    const consoles = await Promise.all(consolesToCreate.map(createConsoles));
+    console.log("Consoles created");
+    console.log("consoles");
   } catch (error) {
     console.error("Error creating initial products");
     throw error;
@@ -170,16 +188,80 @@ async function createInitialUsers() {
   try {
     //Need to create the roles table 1st before adding Users
     console.log("Starting to create initial Users Roles...");
-    const roles = await Promise.all(seedRoles.map(createRole))
-    console.log("Finished creating roles")
-    console.log(roles)
+    const roles = await Promise.all(seedRoles.map(createRole));
+    console.log("Finished creating roles");
+    console.log(roles);
     console.log("Starting to create initial Users...");
     const users = await Promise.all(seedUsers.map(createUser));
     console.log("Users Created", users);
   } catch (error) {
-    console.log("Error creating initial Users")
-    console.error(error)
-    throw error
+    console.log("Error creating initial Users");
+    console.error(error);
+    throw error;
+  }
+}
+
+async function createInitialOrders() {
+  try {
+    console.log("Starting to create orderStatus");
+    const statuses = await Promise.all(seedOrderStatus.map(createOrderStatus));
+    console.log("Finished creating orderStatuses");
+    console.log(statuses);
+
+    console.log("Starting to create orders");
+    const orders = await Promise.all(seedInitalOrders.map(createNewOrder));
+    console.log("Finished creating orders");
+    console.log(orders);
+  } catch (error) {
+    console.log("Error creating initial Orders");
+    console.error(error);
+    throw error;
+  }
+}
+
+async function createInitialCartItems() {
+  try {
+    console.log("Adding Items to Orders");
+    const items = await Promise.all(seedOrderItems.map(addItem));
+    console.log("Finished adding items to orders");
+    console.log(items);
+
+    console.log("Show Orders table with new Totals");
+    const { rows: newOrdersTotal } = await client.query(`SELECT * FROM orders;`);
+    console.log(newOrdersTotal);
+  } catch (error) {
+    console.log("Error creating initial Cart Items");
+    console.error(error);
+    throw error;
+  }
+}
+
+//seed db with different types of order Statuses
+async function changeOrderStatus() {
+  try {
+    console.log("modifying the Orders Table statuses");
+    await Promise.all(seedModifiedOrderStatuses.map(updateOrderStatus));
+    console.log("Updated Orders Table with new Statuses");
+    const { rows: newOrdersStatus } = await client.query(`SELECT * FROM orders;`);
+    console.log(newOrdersStatus);
+  } catch (error) {
+    console.log("Error changing OrderStatus");
+    console.error(error);
+    throw error;
+  }
+}
+
+async function createInventory() {
+  try {
+    console.log("Creating initial inventory");
+    await Promise.all(initialInventory.map(addInventory));
+    console.log("Created initial inventory");
+    const { rows: inventory } = await client.query(`SELECT * FROM inventory;`);
+    console.log(inventory);
+  } catch (error) {
+    console.log("Error creating initial inventory");
+    console.error(error);
+    throw error;
   }
 }
 
@@ -189,7 +271,11 @@ async function rebuildDB() {
     await dropTables();
     await createTables();
     await createInitialProducts();
-    await createInitialUsers()
+    await createInitialUsers();
+    await createInventory();
+    await createInitialOrders();
+    await createInitialCartItems();
+    await changeOrderStatus();
   } catch (error) {
     console.error("error during rebuildDB");
     throw error;
@@ -199,10 +285,3 @@ async function rebuildDB() {
 rebuildDB()
   .catch(console.error)
   .finally(() => client.end());
-
-module.exports = {
-  // dropTables,
-  // createTables,
-  // rebuildDB,
-  // createInitialProducts
-};

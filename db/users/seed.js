@@ -1,13 +1,13 @@
 const seedRoles = [
   {
     name: "admin",
-    description: "admin has privilaged access to add products"
+    description: "admin has privilaged access to add products",
   },
   {
     name: "customer",
-    description: "Customers can shop and purchase products"
-  }
-]
+    description: "Customers can shop and purchase products",
+  },
+];
 
 const seedUsers = [
   {
@@ -55,7 +55,7 @@ const seedUsers = [
   {
     firstName: "Jane",
     lastName: "Doe",
-    email: "john.doe@aol.com",
+    email: "john1.doe@aol.com",
     password: "password123",
     roleId: 1,
   },
@@ -150,9 +150,16 @@ const seedUsers = [
     password: "password123",
     roleId: 2,
   },
+  {
+    firstName: "Anon",
+    lastName: "User",
+    email: "email@email.com",
+    password: "password123",
+    roleId: 2,
+  },
 ];
 
 module.exports = {
   seedUsers,
-  seedRoles
+  seedRoles,
 };
