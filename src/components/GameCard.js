@@ -1,16 +1,26 @@
 import React, { useState, useContext } from "react";
-import { Card, CardContent, CardHeader, Grid, Typography, CardActions, IconButton, CardMedia, Button } from "@material-ui/core"
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Typography,
+  CardActions,
+  IconButton,
+  CardMedia,
+  Button,
+} from "@material-ui/core";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import EditIcon from "@material-ui/icons/Edit";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { CenterFocusStrong } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles";
 
-import {createCart,addItemToOrder,removeItemFromOrder} from '../api'
-import { ShoppingCartContext } from './App';
+import { createCart, addItemToOrder, removeItemFromOrder } from "../api";
+import { ShoppingCartContext } from "./App";
 
-import { CardDescription, EditCard } from './'
+import { CardDescription, EditCard } from "./";
 import { deleteProduct } from "../api";
 
 const useStyles = makeStyles({
@@ -73,126 +83,130 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     backgroundColor: "red",
     padding: "2px",
-  }
+  },
 });
 
 //({ product, isAdmin, user, setProducts })
 const GameCard = ({ products, sessionId }) => {
   const classes = useStyles();
-  const [editMode, setEditMode] = useState(false)
-  const {shoppingCart,setShoppingCart}=useContext(ShoppingCartContext)
+  const [editMode, setEditMode] = useState(false);
+  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
 
   async function handleAddToShoppingCart(product) {
     try {
       if (!shoppingCart?.orderId) {
-        const  {data:cart}  = await createCart({
+        const { data: cart } = await createCart({
           productId: product.id,
           quantity: 1,
           description: product.description,
           price: product.unitPrice,
           sessionId: sessionId,
           orderDate: new Date().toLocaleDateString(),
-          inventoryId:product.inventoryId
+          inventoryId: product.inventoryId,
         });
 
-        setShoppingCart({...cart});
+        setShoppingCart({ ...cart });
         return;
       }
 
-         const addedItem= await addItemToOrder( {
-          productId: product.id,
-          quantity: 1,
-          description: product.description,
-          unitPrice: product.unitPrice,
-          orderId:shoppingCart.orderId,
-          inventoryId:product.inventoryId
-        });
+      const addedItem = await addItemToOrder({
+        productId: product.id,
+        quantity: 1,
+        description: product.description,
+        unitPrice: product.unitPrice,
+        orderId: shoppingCart.orderId,
+        inventoryId: product.inventoryId,
+      });
 
-        const tShoppingCart={...shoppingCart};
-        tShoppingCart.Items=shoppingCart.Items.filter((p) => p.inventoryId !== product.inventoryId)
-        tShoppingCart.Items.push({
-          productId: product.id,
-          quantity:addedItem.quantity,
-          description: product.description,
-          price: addedItem.unitPrice,
-          orderId:addedItem.orderId,
-          inventoryId:product.inventoryId,
-          itemId:addedItem.id
-        })
-        setShoppingCart( tShoppingCart);
-        return;
-      
+      const tShoppingCart = { ...shoppingCart };
+      tShoppingCart.Items = shoppingCart.Items.filter(
+        (p) => p.inventoryId !== product.inventoryId
+      );
+      tShoppingCart.Items.push({
+        productId: product.id,
+        quantity: addedItem.quantity,
+        description: product.description,
+        price: addedItem.unitPrice,
+        orderId: addedItem.orderId,
+        inventoryId: product.inventoryId,
+        itemId: addedItem.id,
+      });
+      setShoppingCart(tShoppingCart);
+      return;
     } catch (error) {
       console.log(error);
     }
   }
 
   async function handleRemoveFromShoppingCart(product) {
-
     try {
       if (!shoppingCart && shoppingCart.Items?.length < 1) return;
-    const tempProdct =
-      shoppingCart.Items.length > 0 && shoppingCart.Items.filter((p) => p.inventoryId == product.inventoryId);
-    if (!tempProdct || tempProdct.length == 0) return;
+      const tempProdct =
+        shoppingCart.Items.length > 0 &&
+        shoppingCart.Items.filter((p) => p.inventoryId == product.inventoryId);
+      if (!tempProdct || tempProdct.length == 0) return;
 
-    let orderItemId=tempProdct[0].itemId
-    let inventoryId=product.inventoryId
+      let orderItemId = tempProdct[0].itemId;
+      let inventoryId = product.inventoryId;
 
-    const {data:removedItem}=await removeItemFromOrder({inventoryId,orderItemId})
+      const { data: removedItem } = await removeItemFromOrder({
+        inventoryId,
+        orderItemId,
+      });
 
-    const tShoppingCart={...shoppingCart};
-        tShoppingCart.Items=shoppingCart.Items.filter((p) => p.inventoryId !== product.inventoryId)
-     
-        if(!removedItem || removedItem.length==0){
-          setShoppingCart( tShoppingCart);
-          return
-        }
-   
+      const tShoppingCart = { ...shoppingCart };
+      tShoppingCart.Items = shoppingCart.Items.filter(
+        (p) => p.inventoryId !== product.inventoryId
+      );
+
+      if (!removedItem || removedItem.length == 0) {
+        setShoppingCart(tShoppingCart);
+        return;
+      }
+
       tShoppingCart.Items.push({
-          productId: product.id,
-          quantity:removedItem.quantity,
-          description: product.description,
-          price: removedItem.unitPrice,
-          orderId:removedItem.orderId,
-          inventoryId:product.inventoryId,
-          itemId:removedItem.id
-        });
-        setShoppingCart( tShoppingCart);
-
+        productId: product.id,
+        quantity: removedItem.quantity,
+        description: product.description,
+        price: removedItem.unitPrice,
+        orderId: removedItem.orderId,
+        inventoryId: product.inventoryId,
+        itemId: removedItem.id,
+      });
+      setShoppingCart(tShoppingCart);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    
   }
 
-  const getOrderCountForInvetory=(inventoryId)=>{
+  const getOrderCountForInvetory = (inventoryId) => {
+    const { Items: items } = shoppingCart?.Items ? shoppingCart : [];
 
-    const {Items:items}=shoppingCart
-    
-    if(!items) return
-   
-     const numberOfItems = items.reduce((acc, p) => p.inventoryId ==inventoryId? +p.quantity + acc:acc , 0);
-     
-     return numberOfItems;
+    if (!items) return;
 
-  }
+    const numberOfItems = items.reduce(
+      (acc, p) => (p.inventoryId == inventoryId ? +p.quantity + acc : acc),
+      0
+    );
+
+    return numberOfItems;
+  };
 
   const handleDelete = async () => {
-    const token = user.token
-    const productId = product.id
+    const token = user.token;
+    const productId = product.id;
     try {
-      const res = await deleteProduct(productId, token)
+      const res = await deleteProduct(productId, token);
       if (res) {
-
-        setProducts(products => {
-          return [...products].filter(el => el.id !== productId)
-        })
+        setProducts((products) => {
+          return [...products].filter((el) => el.id !== productId);
+        });
       }
     } catch (error) {
-      console.log("Trouble Deleting Product")
-      console.dir(error)
+      console.log("Trouble Deleting Product");
+      console.dir(error);
     }
-  }
+  };
 
   return (
     <>
@@ -201,16 +215,15 @@ const GameCard = ({ products, sessionId }) => {
           <Grid item xs={12} sm={6} md={4} key={product.inventoryId}>
             <Card key={product.id} elevation={2} className={classes.cardHeight}>
               <CardHeader
-                title={product.title+'-'+product.inventoryDescription  }
+                title={product.title + "-" + product.inventoryDescription}
                 subheader={product.unitPrice}
-              >
-              </CardHeader>
+              ></CardHeader>
               <CardContent className={classes.scroll}>
                 <Typography>Description:</Typography>
                 <Typography>{product.description}</Typography>
               </CardContent>
-{/*Break the cardActions into 2 components. 1 for Admin, one for standard user. Below is Admin code*/}
-{/*{(isAdmin) &&
+              {/*Break the cardActions into 2 components. 1 for Admin, one for standard user. Below is Admin code*/}
+              {/*{(isAdmin) &&
           <CardActions style={{ "justifyContent": 'flex-end' }}>
             <IconButton style={{ color: 'red' }} onClick={handleDelete}>
               <DeleteForeverIcon />
@@ -228,14 +241,15 @@ const GameCard = ({ products, sessionId }) => {
                     style={{ backgroundColor: "navy" }}
                     onClick={() => handleAddToShoppingCart(product)}
                   >
-                    <AddShoppingCartIcon
-                      className={classes.addShoppingCartIcon}
-                    />
+                    <AddShoppingCartIcon className={classes.addShoppingCartIcon} />
 
-
-               {'    ' + getOrderCountForInvetory(product.inventoryId)>0?<span className={classes.shoppingCartCountNotifier}>{getOrderCountForInvetory(product.inventoryId)} </span>:''  } 
-
-             
+                    {"    " + getOrderCountForInvetory(product.inventoryId) > 0 ? (
+                      <span className={classes.shoppingCartCountNotifier}>
+                        {getOrderCountForInvetory(product.inventoryId)}{" "}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </Button>
                 </div>
                 <div className={classes.removeShopingCartContainer}>
@@ -244,9 +258,7 @@ const GameCard = ({ products, sessionId }) => {
                     color="secondary"
                     onClick={() => handleRemoveFromShoppingCart(product)}
                   >
-                    <RemoveShoppingCartIcon
-                      className={classes.removeShoppingCartIcon}
-                    />
+                    <RemoveShoppingCartIcon className={classes.removeShoppingCartIcon} />
                   </Button>
                 </div>
               </CardActions>
