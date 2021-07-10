@@ -9,3 +9,5 @@ export { default as MyTextField } from "./MyTextField";
 export { default as CardDescription } from "./CardDescription";
 export { default as EditCard } from "./EditCard";
 export { default as MyTextArea } from "./MyTextArea";
+export { default as UserCardActions } from "./UserCardActions";
+export { default as AdminCardActions } from "./AdminCardActions";
