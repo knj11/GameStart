@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Fab } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles"
-import { GamePage, NavBar, AuthDialog } from "./index"
+import { GamePage, NavBar } from "./index"
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import { fetchAllProducts, fetchUserCart } from "../api";
@@ -34,8 +34,6 @@ const App = () => {
 
   const isAdmin = (user.roleId === 1)
 
-  //const renderProductCards = (products) => (products) && products.map((product) => <GamePage setProducts={setProducts} user={user} product={product} isAdmin={isAdmin} />)
-
   useEffect(() => {
     fetchAllProducts()
       .then((response) => {
@@ -55,16 +53,6 @@ const App = () => {
       })
       .catch(console.error);
   }, []);
-  // const renderProductCards = (products) =>
-  //   products &&
-  // products.map((product) => (
-  //   <GamePage
-  //     product={product}
-  //     shoppingCart={shoppingCart}
-  //     setShoppingCart={setShoppingCart}
-  //   />
-  // ));
-
 
   return (
     <Router>
