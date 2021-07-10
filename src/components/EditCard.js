@@ -51,7 +51,7 @@ const EditCard = ({ product }) => {
       {({ error, isSubmitting }) => (
         <Form>
           <CardHeader title={<Title />} subheader={<Price />} />
-          <CardMedia style={{ height: '100%', width: '100%' }} image={product.picture} title='Video Game' />
+          {/* <CardMedia style={{ height: '100%', width: '100%' }} image={product.picture} title='Video Game' /> */}
           <CardContent style={{ overflow: 'auto', height: '150px' }}>
             <Typography>Description:</Typography>
             <div style={{display: "flex"}}>

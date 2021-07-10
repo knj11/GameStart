@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { ShoppingCartContext } from "./App";
 import { createCart, addItemToOrder, removeItemFromOrder } from "../api";
+import CardDescription from "./CardDescription";
 
 const useStyles = makeStyles({
   addShopingCartContainer: {
@@ -59,7 +60,7 @@ const useStyles = makeStyles({
   },
 });
 
-const UserCardActions = ({ product, sessionId }) => {
+const UserCardView = ({ product, sessionId }) => {
   const classes = useStyles();
   const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
 
@@ -164,36 +165,39 @@ const UserCardActions = ({ product, sessionId }) => {
   };
 
   return (
-    <CardActions className={classes.cardAction}>
-      <div className={classes.addShopingCartContainer}>
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ backgroundColor: "navy" }}
-          onClick={() => handleAddToShoppingCart(product)}
-        >
-          <AddShoppingCartIcon className={classes.addShoppingCartIcon} />
+    <>
+      <CardDescription product={product} />
+      <CardActions className={classes.cardAction}>
+        <div className={classes.addShopingCartContainer}>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: "navy" }}
+            onClick={() => handleAddToShoppingCart(product)}
+          >
+            <AddShoppingCartIcon className={classes.addShoppingCartIcon} />
 
-          {"    " + getOrderCountForInvetory(product.inventoryId) > 0 ? (
-            <span className={classes.shoppingCartCountNotifier}>
-              {getOrderCountForInvetory(product.inventoryId)}{" "}
-            </span>
-          ) : (
-            ""
-          )}
-        </Button>
-      </div>
-      <div className={classes.removeShopingCartContainer}>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => handleRemoveFromShoppingCart(product)}
-        >
-          <RemoveShoppingCartIcon className={classes.removeShoppingCartIcon} />
-        </Button>
-      </div>
-    </CardActions>
+            {"    " + getOrderCountForInvetory(product.inventoryId) > 0 ? (
+              <span className={classes.shoppingCartCountNotifier}>
+                {getOrderCountForInvetory(product.inventoryId)}{" "}
+              </span>
+            ) : (
+              ""
+            )}
+          </Button>
+        </div>
+        <div className={classes.removeShopingCartContainer}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleRemoveFromShoppingCart(product)}
+          >
+            <RemoveShoppingCartIcon className={classes.removeShoppingCartIcon} />
+          </Button>
+        </div>
+      </CardActions>
+    </>
   )
 }
 
-export default UserCardActions
+export default UserCardView

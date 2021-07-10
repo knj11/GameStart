@@ -5,16 +5,11 @@ import {
   CardHeader,
   Grid,
   Typography,
-  CardActions,
-  IconButton,
-  CardMedia,
-  Button,
 } from "@material-ui/core";
-import { CenterFocusStrong } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { ShoppingCartContext, UserContext } from "./App";
-import { UserCardActions, AdminCardActions } from ".";
+import { UserCardView, AdminCardView, CardDescription, EditCard } from ".";
 
 
 
@@ -26,7 +21,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "300px",
+    height: "400px",
   },
   scroll: {
     //make sure to consider parent "contanter" when setting height. If larger the box wont scroll
@@ -85,10 +80,8 @@ const useStyles = makeStyles({
 });
 
 //({ product, isAdmin, user, setProducts })
-const GameCard = ({ products, setProducts, sessionId }) => {
+const GamePage = ({ products, setProducts, sessionId }) => {
   const classes = useStyles();
-  const [editMode, setEditMode] = useState(false);
-  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
   const { user } = useContext(UserContext);
 
   const isAdmin = (user.roleId === 1)
@@ -99,16 +92,9 @@ const GameCard = ({ products, setProducts, sessionId }) => {
         products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.inventoryId}>
             <Card key={product.id} elevation={2} className={classes.cardHeight}>
-              <CardHeader
-                title={product.title + "-" + product.inventoryDescription}
-                subheader={product.unitPrice}
-              ></CardHeader>
-              <CardContent className={classes.scroll}>
-                <Typography>Description:</Typography>
-                <Typography>{product.description}</Typography>
-              </CardContent>
-              {/*Break the cardActions into 2 components. 1 for Admin, one for standard user. Below is Admin code*/}
-              {(isAdmin) ? <AdminCardActions setProducts={setProducts} product={product} /> : <UserCardActions product={product} sessionId={sessionId} />}
+              {/*Break the cardActions into 2 components. 1 for Admin, one for standard user*/}
+              {console.log("id", product.id)}
+              {(isAdmin) ? <AdminCardView setProducts={setProducts} product={product} /> : <UserCardView product={product} sessionId={sessionId} />}
             </Card>
           </Grid>
         ))}
@@ -116,4 +102,4 @@ const GameCard = ({ products, setProducts, sessionId }) => {
   );
 };
 
-export default GameCard;
+export default GamePage;

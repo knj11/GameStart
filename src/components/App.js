@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Fab } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles"
-import { GameCard, NavBar, AuthDialog } from "./index"
+import { GamePage, NavBar, AuthDialog } from "./index"
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import { fetchAllProducts, fetchUserCart } from "../api";
@@ -34,7 +34,7 @@ const App = () => {
 
   const isAdmin = (user.roleId === 1)
 
-  //const renderProductCards = (products) => (products) && products.map((product) => <GameCard setProducts={setProducts} user={user} product={product} isAdmin={isAdmin} />)
+  //const renderProductCards = (products) => (products) && products.map((product) => <GamePage setProducts={setProducts} user={user} product={product} isAdmin={isAdmin} />)
 
   useEffect(() => {
     fetchAllProducts()
@@ -58,7 +58,7 @@ const App = () => {
   // const renderProductCards = (products) =>
   //   products &&
   // products.map((product) => (
-  //   <GameCard
+  //   <GamePage
   //     product={product}
   //     shoppingCart={shoppingCart}
   //     setShoppingCart={setShoppingCart}
@@ -75,7 +75,7 @@ const App = () => {
             <Route path="/" exact>
               <Grid container spacing={3} className={classes.gridContainer}>
 
-                <GameCard
+                <GamePage
                   setProducts={setProducts}
                   products={products}
                   sessionId={sessionId}
