@@ -22,7 +22,8 @@ const useStyles = makeStyles({
   }
 })
 
-export const ShoppingCartContext=React.createContext({})
+export const ShoppingCartContext = React.createContext({})
+export const UserContext = React.createContext({})
 
 const App = () => {
   const classes = useStyles();
@@ -30,10 +31,10 @@ const App = () => {
   const [user, setUser] = useLocalStorage("user", { id: '', roleId: '' });
   const [shoppingCart, setShoppingCart] = useState({});
   const [sessionId] = useLocalStorage("sessionId", generateSessionId());
-  
+
   const isAdmin = (user.roleId === 1)
-  
-  const renderProductCards = (products) => (products) && products.map((product) => <GameCard setProducts={setProducts} user={user} product={product} isAdmin={isAdmin} />)
+
+  //const renderProductCards = (products) => (products) && products.map((product) => <GameCard setProducts={setProducts} user={user} product={product} isAdmin={isAdmin} />)
 
   useEffect(() => {
     fetchAllProducts()
@@ -46,11 +47,11 @@ const App = () => {
 
   useEffect(() => {
     fetchUserCart({ user, sessionId })
-      .then(({data}) => {
-        const [cart]=data
+      .then(({ data }) => {
+        const [cart] = data
         console.log(cart);
         setShoppingCart(cart);
-       scrollBy
+        scrollBy
       })
       .catch(console.error);
   }, []);
@@ -66,27 +67,32 @@ const App = () => {
 
 
   return (
-    <Router>  <ShoppingCartContext.Provider value ={{shoppingCart,setShoppingCart}}>
-      <NavBar user={user} setUser={setUser} />
-      <Switch>
-        <Route path="/" exact>
-          <Grid container spacing={3} className={classes.gridContainer}>
-          
-            <GameCard
-              products={products}
-              sessionId={sessionId}
-            />
-          </Grid>
-          {(isAdmin) && 
-            <Fab className={classes.addButton} color="primary" >
-              <AddIcon />
-            </Fab>
-          }
-        </Route>
-        <Route path="/cart">
-          <h1>Hello World</h1>
-        </Route>
-      </Switch></ShoppingCartContext.Provider>
+    <Router>
+      <UserContext.Provider value={{ user, setUser }}>
+        <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
+          <NavBar user={user} setUser={setUser} />
+          <Switch>
+            <Route path="/" exact>
+              <Grid container spacing={3} className={classes.gridContainer}>
+
+                <GameCard
+                  setProducts={setProducts}
+                  products={products}
+                  sessionId={sessionId}
+                />
+              </Grid>
+              {(isAdmin) &&
+                <Fab className={classes.addButton} color="primary" >
+                  <AddIcon />
+                </Fab>
+              }
+            </Route>
+            <Route path="/cart">
+              <h1>Hello World</h1>
+            </Route>
+          </Switch>
+        </ShoppingCartContext.Provider>
+      </UserContext.Provider>
     </Router>
   );
 };

@@ -39,13 +39,13 @@ const useStyles = makeStyles({
 const NavBar = ({ user, setUser }) => {
   const classes = useStyles();
 
-  const {shoppingCart} = useContext(ShoppingCartContext)
+  const { shoppingCart } = useContext(ShoppingCartContext)
 
   function getItemsCount() {
-    const {Items:items}=shoppingCart
-    
-   if(!items) return
-  
+    const { Items: items } = shoppingCart
+
+    if (!items) return
+
     const numberOfItems = items.reduce((acc, p) => +p.quantity + acc, 0);
     return numberOfItems;
   }
@@ -55,11 +55,11 @@ const NavBar = ({ user, setUser }) => {
       <Toolbar className={classes.flex}>
         <Typography variant="h6">GameStart</Typography>
         <div className={classes.cartContainer}>
-          
+
           {shoppingCart && shoppingCart?.Items?.length > 0 ? (
             <>
               <ShoppingCartIcon className={classes.shoppingCartCount} />
-            
+
               <span className={classes.shoppingCartCountNotifier}>
                 {getItemsCount()}
               </span>
@@ -70,11 +70,6 @@ const NavBar = ({ user, setUser }) => {
         </div>
         <div>
           {(user.id) ? <AccountMenu setUser={setUser} /> : <AuthDialog setUser={setUser} />}
-
-          {/* <Menu anchorEl={accountMenu} open={Boolean(accountMenu)} onClose={handleClose}>
-            <MenuItem>Sign-up</MenuItem>
-            <MenuItem>Log-In</MenuItem>
-          </Menu> */}
         </div>
       </Toolbar>
     </AppBar>
