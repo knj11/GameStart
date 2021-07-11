@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Fab } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles"
-import { GamePage, NavBar } from "./index"
+import { GamePage, NavBar, AddProduct } from "./index"
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import { fetchAllProducts, fetchUserCart } from "../api";
@@ -69,11 +69,7 @@ const App = () => {
                   sessionId={sessionId}
                 />
               </Grid>
-              {(isAdmin) &&
-                <Fab className={classes.addButton} color="primary" >
-                  <AddIcon />
-                </Fab>
-              }
+              {(isAdmin) && <AddProduct setProducts={setProducts} />}
             </Route>
             <Route path="/cart">
               <h1>Hello World</h1>

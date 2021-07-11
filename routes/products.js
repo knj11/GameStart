@@ -24,10 +24,10 @@ productsRouter.get("/", async (req, res) => {
 productsRouter.post('/', async (req, res, next) => {
 	try {
     //ensure that the user has admin rights
-          //if (req.user.role !== 1) throw "user is not an administrator"
-		const { title, description, picture, unitPrice = "" } = req.body;
+    if (req.user.roleId !== 1) throw "user is not an administrator"
+		const { title, description, unitPrice } = req.body;
 
-		const createNewProduct = await createProduct({ title, description, picture, unitPrice });
+		const createNewProduct = await createProduct({ title, description, unitPrice });
 
 		res.send(createNewProduct);
 	} catch (error) {

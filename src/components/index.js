@@ -11,3 +11,5 @@ export { default as EditCard } from "./EditCard";
 export { default as MyTextArea } from "./MyTextArea";
 export { default as UserCardView } from "./UserCardView";
 export { default as AdminCardView } from "./AdminCardView";
+export { default as AddProduct } from "./AddProduct";
+export { default as AddProductForm } from "./AddProductForm";
