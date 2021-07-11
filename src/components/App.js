@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Fab } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles"
-import { GamePage, NavBar, AddProduct } from "./index"
+import { GamePage, NavBar, AddProduct, CustomerInfoPage } from "./index"
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import { fetchAllProducts, fetchUserCart } from "../api";
@@ -75,7 +75,7 @@ const App = () => {
               <h1>Hello World</h1>
             </Route>
             <Route exact path="/users">
-              <h1>Hello World</h1>
+              <CustomerInfoPage />
             </Route>
           </Switch>
         </ShoppingCartContext.Provider>

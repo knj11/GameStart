@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import * as yup from 'yup'
 
 import { MyTextField } from './'
-import { loginUser } from '../auth'
+import { loginUser } from '../api'
 
 const validationSchema = yup.object({
   email: yup.string().required().min(6),
