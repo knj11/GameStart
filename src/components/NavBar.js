@@ -5,6 +5,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { AuthDialog, AccountMenu } from ".";
 import { Block } from "@material-ui/icons";
 import { ShoppingCartContext } from './App';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   flex: {
@@ -53,7 +54,7 @@ const NavBar = ({ user, setUser }) => {
   return (
     <AppBar position="sticky">
       <Toolbar className={classes.flex}>
-        <Typography variant="h6">GameStart</Typography>
+        <Typography style={{color: "white", textDecoration: "none"}} component={Link} to={'/'} variant="h6">GameStart</Typography>
         <div className={classes.cartContainer}>
 
           {shoppingCart && shoppingCart?.Items?.length > 0 ? (

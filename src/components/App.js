@@ -71,7 +71,10 @@ const App = () => {
               </Grid>
               {(isAdmin) && <AddProduct setProducts={setProducts} />}
             </Route>
-            <Route path="/cart">
+            <Route exact path="/cart">
+              <h1>Hello World</h1>
+            </Route>
+            <Route exact path="/users">
               <h1>Hello World</h1>
             </Route>
           </Switch>
