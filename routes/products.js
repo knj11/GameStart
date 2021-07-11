@@ -40,12 +40,11 @@ productsRouter.post('/', async (req, res, next) => {
 productsRouter.put('/', async (req, res, next) => {
   try {
     //ensure that the user has admin rights
-          //if (req.user.role !== 1) throw "user is not an administrator"
-    const { activityId: id } = req.params;
+    if (req.user.roleId !== 1) throw "user is not an administrator"
+    const { id } = req.query;
+    const {title, description, unitPrice} = req.body
 
-    const { title, description, picture, unitPrice } = req.body;
-
-    const updatedProduct = await updateProduct({ title, description, picture, unitPrice });
+    const updatedProduct = await updateProduct(id, { title, description, unitPrice });
 
     res.send(updatedProduct);
   } catch (error) {
@@ -58,7 +57,7 @@ productsRouter.put('/', async (req, res, next) => {
 productsRouter.delete('/', async (req, res, next) => {
 	try {
     //ensure that the user has admin rights
-    if (req.user.role === 1) throw "user is not an administrator"
+    if (req.user.roleId !== 1) throw "user is not an administrator"
 		const { id } = req.query;
     console.log("This is the delete id", id)
 		

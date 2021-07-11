@@ -87,7 +87,7 @@ const GamePage = ({ products, setProducts, sessionId }) => {
     <>
       {products &&
         products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.inventoryId}>
+          <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Card key={product.id} elevation={2} className={classes.cardHeight}>
               {/*Break the cardActions into 2 components. 1 for Admin, one for standard user*/}
               {(isAdmin) ? <AdminCardView setProducts={setProducts} product={product} /> : <UserCardView product={product} sessionId={sessionId} />}

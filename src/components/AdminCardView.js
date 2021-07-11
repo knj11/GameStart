@@ -48,11 +48,7 @@ const AdminCardView = ({ product, setProducts }) => {
         </>
         :
         <>
-          <EditCard product={product} />
-          <CardActions style={{ "justifyContent": 'flex-end' }}>
-            <Button variant="contained" style={{ backgroundColor: "red", color: "white" }} onClick={toggleEditMode}>Cancel</Button>
-            <Button variant="contained" color="primary">Submit</Button>
-          </CardActions>
+          <EditCard setProducts={setProducts} product={product} toggleEditMode={toggleEditMode} />
         </>
       }
     </>
