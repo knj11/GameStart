@@ -1,31 +1,31 @@
 import axios from "axios";
 
 
-export async function createCart ({productId,
+export async function createCart({ productId,
     quantity,
     description,
     price,
     sessionId,
     orderDate,
-inventoryId}){
+    inventoryId }) {
 
     try {
-        const cart = await axios.post('api/orders',{
-          productId,
-          quantity,
-          description,
-          price,
-          sessionId,
-          orderDate,
-          inventoryId
-    })
+        const cart = await axios.post('api/orders', {
+            productId,
+            quantity,
+            description,
+            price,
+            sessionId,
+            orderDate,
+            inventoryId
+        })
 
 
-    return cart
+        return cart
     } catch (error) {
 
-        return(error)
-        
+        return (error)
+
     }
 }
 

@@ -1,3 +1,3 @@
-export { fetchAllProducts } from './product/fetchAllProducts'
-export { deleteProduct } from './product/deleteProduct'
-export { editedProduct } from './product/editedProduct'
+export { fetchAllProducts } from './fetchAllProducts'
+export { deleteProduct } from './deleteProduct'
+export { editProduct } from './editProduct'

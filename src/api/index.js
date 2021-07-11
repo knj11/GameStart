@@ -1,1 +1,2 @@
-export { deletedProduct, fetchAllProducts, editedProduct } from './product'
+export * from './product'
+export * from './orders'
