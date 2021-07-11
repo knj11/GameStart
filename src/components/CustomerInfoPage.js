@@ -1,14 +1,20 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { fetchAllUsers } from '../api'
+
+import { UserContext } from "./App";
 
 const CustomerInfoPage = () => {
-  const [users, setUsers] = setState(null)
+  const { user } = useContext(UserContext);
+  const [users, setUsers] = useState(null)
 
-  // useEffect(() => {
-
-  // }, [])
+  useEffect(() => {
+    fetchAllUsers(user.token).then(allUsers => setUsers(allUsers)).catch(error => console.log('error :>> ', error))
+  }, [])
 
   return (
-    <div></div>
+    <>
+      {(users) && users.map(el => <div>{el.firstName}</div>)}
+    </>
   )
 }
 

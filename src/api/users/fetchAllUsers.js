@@ -1,18 +1,18 @@
 import axios from 'axios'
 
-const PRODUCT_URL = 'api/users'
+const USERS_URL = 'api/users'
 
-export async function fetchAllUsers(token, { title, unitPrice, description }) {
+export async function fetchAllUsers(token) {
   try {
-    const { data: newProduct } = await axios.post(PRODUCT_URL, { title, unitPrice, description }, {
+    const { data: allUsers } = await axios.get(USERS_URL, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-
-    return newProduct
+    console.log('allUsers :>> ', allUsers);
+    return allUsers
   } catch (error) {
     console.dir(error)
-    return null
+    throw error
   }
 }

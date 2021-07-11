@@ -29,7 +29,7 @@ const AccountMenu = ({ setUser }) => {
       >
         <MenuItem onClick={handleClose}>Account</MenuItem>
         {(isAdmin) && <MenuItem component={Link} style={{color: "black", textDecoration: "none"}} to="/users" onClick={handleClose}>Users Page</MenuItem>}
-        <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+        <MenuItem component={Link} style={{color: "black", textDecoration: "none"}} to="/" onClick={handleSignOut}>Sign Out</MenuItem>
       </Menu>
     </>
   )
