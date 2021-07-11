@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { fetchAllUsers } from '../api'
+import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { UserContext } from "./App";
 
