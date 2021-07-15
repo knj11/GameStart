@@ -4,8 +4,8 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 
 import { MyTextField } from "./";
-import { loginUser } from "../auth";
-import { fetchUserCart } from "../api";
+//import { loginUser } from "../auth";
+import { fetchUserCart, loginUser } from "../api";
 
 const validationSchema = yup.object({
   email: yup.string().required().min(6),

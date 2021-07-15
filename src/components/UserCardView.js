@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ShoppingCartContext } from "./App";
 import { createCart, addItemToOrder, removeItemFromOrder } from "../api";
 import { CardDescription, EditCard } from "./";
-import { CardDescription, EditCard } from "./";
 import { deleteProduct } from "../api";
 import handleAddToShoppingCartCreator from "../util/handleAddToShoppingCart";
 import handleRemoveFromShoppingCartRemover from "../util/handleRemoveFromShoppingCart";
@@ -65,7 +64,7 @@ const useStyles = makeStyles({
 });
 
 //({ product, isAdmin, user, setProducts })
-const GameCard = ({ products, sessionId, user }) => {
+const UserCardView = ({ products, sessionId, user }) => {
   const classes = useStyles();
   const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
 

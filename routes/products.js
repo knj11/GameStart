@@ -24,22 +24,14 @@ productsRouter.get("/", async (req, res) => {
 productsRouter.post("/", async (req, res, next) => {
   try {
     //ensure that the user has admin rights
-<<<<<<< HEAD
-    if (req.user.roleId !== 1) throw "user is not an administrator"
-		const { title, description, unitPrice } = req.body;
-
-		const createNewProduct = await createProduct({ title, description, unitPrice });
-=======
-    //if (req.user.role !== 1) throw "user is not an administrator"
-    const { title, description, picture, unitPrice = "" } = req.body;
+    if (req.user.roleId !== 1) throw "user is not an administrator";
+    const { title, description, unitPrice } = req.body;
 
     const createNewProduct = await createProduct({
       title,
       description,
-      picture,
       unitPrice,
     });
->>>>>>> c0641d7 (Final pull before merge)
 
     res.send(createNewProduct);
   } catch (error) {
@@ -52,25 +44,15 @@ productsRouter.post("/", async (req, res, next) => {
 productsRouter.put("/", async (req, res, next) => {
   try {
     //ensure that the user has admin rights
-<<<<<<< HEAD
-    if (req.user.roleId !== 1) throw "user is not an administrator"
+    if (req.user.roleId !== 1) throw "user is not an administrator";
     const { id } = req.query;
-    const {title, description, unitPrice} = req.body
+    const { title, description, unitPrice } = req.body;
 
-    const updatedProduct = await updateProduct(id, { title, description, unitPrice });
-=======
-    //if (req.user.role !== 1) throw "user is not an administrator"
-    const { activityId: id } = req.params;
-
-    const { title, description, picture, unitPrice } = req.body;
-
-    const updatedProduct = await updateProduct({
+    const updatedProduct = await updateProduct(id, {
       title,
       description,
-      picture,
       unitPrice,
     });
->>>>>>> c0641d7 (Final pull before merge)
 
     res.send(updatedProduct);
   } catch (error) {
@@ -83,21 +65,12 @@ productsRouter.put("/", async (req, res, next) => {
 productsRouter.delete("/", async (req, res, next) => {
   try {
     //ensure that the user has admin rights
-<<<<<<< HEAD
-    if (req.user.roleId !== 1) throw "user is not an administrator"
-		const { id } = req.query;
-    console.log("This is the delete id", id)
-		
-		//const getProduct = await getProductById(id);
-	//if (getProduct) {
-=======
-    if (req.user.role === 1) throw "user is not an administrator";
+    if (req.user.roleId !== 1) throw "user is not an administrator";
     const { id } = req.query;
     console.log("This is the delete id", id);
 
     //const getProduct = await getProductById(id);
     //if (getProduct) {
->>>>>>> c0641d7 (Final pull before merge)
     const deletedProduct = await deleteProduct(id);
     if (!deletedProduct) throw "Product was NOT deleted";
     res.send(deletedProduct);

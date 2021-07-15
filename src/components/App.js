@@ -12,9 +12,6 @@ import {
   CustomerInfoPage,
 } from "./index";
 
-import { Grid, Fab } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import { makeStyles } from "@material-ui/core/styles";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import { fetchAllProducts, fetchUserCart } from "../api";

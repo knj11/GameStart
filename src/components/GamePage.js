@@ -1,14 +1,9 @@
 import React, { useContext } from "react";
-import {
-  Card,
-  Grid,
-} from "@material-ui/core";
+import { Card, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { UserContext } from "./App";
 import { UserCardView, AdminCardView } from ".";
-
-
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -76,12 +71,11 @@ const useStyles = makeStyles({
   },
 });
 
-
 const GamePage = ({ products, setProducts, sessionId }) => {
   const classes = useStyles();
   const { user } = useContext(UserContext);
 
-  const isAdmin = (user.roleId === 1)
+  const isAdmin = user.roleId === 1;
 
   return (
     <>
@@ -90,7 +84,11 @@ const GamePage = ({ products, setProducts, sessionId }) => {
           <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Card key={product.id} elevation={2} className={classes.cardHeight}>
               {/*Break the cardActions into 2 components. 1 for Admin, one for standard user*/}
-              {(isAdmin) ? <AdminCardView setProducts={setProducts} product={product} /> : <UserCardView product={product} sessionId={sessionId} />}
+              {isAdmin ? (
+                <AdminCardView setProducts={setProducts} product={product} />
+              ) : (
+                <UserCardView product={product} sessionId={sessionId} />
+              )}
             </Card>
           </Grid>
         ))}
