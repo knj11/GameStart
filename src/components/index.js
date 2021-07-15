@@ -14,3 +14,6 @@ export { default as AdminCardView } from "./AdminCardView";
 export { default as AddProduct } from "./AddProduct";
 export { default as AddProductForm } from "./AddProductForm";
 export { default as CustomerInfoPage } from "./CustomerInfoPage";
+export { default as handleAddToShoppingCartCreator } from "../util/handleAddToShoppingCart";
+export { default as handleRemoveFromShoppingCartRemover } from "../util/handleRemoveFromShoppingCart";
+export { default as CheckOut } from "./CheckOut";

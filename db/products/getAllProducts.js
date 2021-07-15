@@ -1,5 +1,8 @@
 //For some reason when you require client from index.js file it does not work...
 const { client } = require("../client");
+const {
+  productsToArryedObjWithInventory,
+} = require("./productsToArrayedObjWithInventory");
 
 async function getAllProducts() {
   try {
@@ -9,6 +12,7 @@ async function getAllProducts() {
         FROM products a JOIN inventory b on a.id=b."productId" ;
       `
     );
+
     return products;
   } catch (error) {
     return error;
