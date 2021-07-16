@@ -1,5 +1,5 @@
 export { default as App } from "./App";
-export { default as GameCard } from "./GameCard";
+export { default as GamePage } from "./GamePage";
 export { default as NavBar } from "./NavBar";
 export { default as AuthDialog } from "./AuthDialog";
 export { default as LoginForm } from "./LoginForm";
@@ -9,3 +9,11 @@ export { default as MyTextField } from "./MyTextField";
 export { default as CardDescription } from "./CardDescription";
 export { default as EditCard } from "./EditCard";
 export { default as MyTextArea } from "./MyTextArea";
+export { default as UserCardView } from "./UserCardView";
+export { default as AdminCardView } from "./AdminCardView";
+export { default as AddProduct } from "./AddProduct";
+export { default as AddProductForm } from "./AddProductForm";
+export { default as CustomerInfoPage } from "./CustomerInfoPage";
+export { default as handleAddToShoppingCartCreator } from "../util/handleAddToShoppingCart";
+export { default as handleRemoveFromShoppingCartRemover } from "../util/handleRemoveFromShoppingCart";
+export { default as CheckOut } from "./CheckOut";

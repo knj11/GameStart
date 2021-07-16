@@ -78,7 +78,7 @@ async function createTables() {
       "statusDate" timestamp DEFAULT CURRENT_TIMESTAMP,
       "orderStatusId" int DEFAULT 1,
       "userId" int NOT NULL DEFAULT 9999, --9999 - anonymous user
-      "sessionId" varchar(36) UNIQUE 
+      "sessionId" varchar(36)  
      );
 
     CREATE TABLE "users" (
@@ -227,7 +227,9 @@ async function createInitialCartItems() {
     console.log(items);
 
     console.log("Show Orders table with new Totals");
-    const { rows: newOrdersTotal } = await client.query(`SELECT * FROM orders;`);
+    const { rows: newOrdersTotal } = await client.query(
+      `SELECT * FROM orders;`
+    );
     console.log(newOrdersTotal);
   } catch (error) {
     console.log("Error creating initial Cart Items");
@@ -242,7 +244,9 @@ async function changeOrderStatus() {
     console.log("modifying the Orders Table statuses");
     await Promise.all(seedModifiedOrderStatuses.map(updateOrderStatus));
     console.log("Updated Orders Table with new Statuses");
-    const { rows: newOrdersStatus } = await client.query(`SELECT * FROM orders;`);
+    const { rows: newOrdersStatus } = await client.query(
+      `SELECT * FROM orders;`
+    );
     console.log(newOrdersStatus);
   } catch (error) {
     console.log("Error changing OrderStatus");

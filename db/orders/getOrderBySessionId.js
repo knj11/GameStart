@@ -1,7 +1,7 @@
 const { client } = require("../client");
 const { createCartStructure } = require("./createCartStructure");
 
-async function getOrderBySessionId(sessionId) {
+async function getOrderBySessionId(sessionId, userId) {
   try {
     const { rows: order } = await client.query(
       /*sql*/ `
@@ -10,12 +10,11 @@ async function getOrderBySessionId(sessionId) {
       LEFT JOIN "ordersItem" b ON a.id = b."orderId"
       LEFT JOIN inventory d on d."id" =b."inventoryId"
       LEFT JOIN products c ON d."productId" = c.id
-      WHERE "sessionId"=$1 and a."orderStatusId"=1;
+      WHERE (a."sessionId"=$1 or a."userId"=$2) and a."orderStatusId"=1;
       
     `,
-      [sessionId]
+      [sessionId, userId]
     );
-    console.log(order)
     return createCartStructure(order);
   } catch (error) {
     throw error;

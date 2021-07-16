@@ -5,4 +5,5 @@ module.exports = {
   ...require("./getUser"),
   ...require("./seed"),
   ...require("./getUserById"),
+  ...require("./getAllUsers")
 };

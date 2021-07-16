@@ -7,4 +7,5 @@ module.exports = {
   ...require("./createConsoles"),
   ...require("./getUnitPrice"),
   ...require("./createInitialInventory"),
+  ...require("./productsToArrayedObjWithInventory"),
 };

@@ -1,8 +1,17 @@
 import axios from "axios";
 
 export async function fetchUserCart({ user, sessionId }) {
-
-  return axios.get(`api/orders/${sessionId}`)
+  return axios.post(
+    `api/orders/pendingCart`,
+    {
+      sessionId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    }
+  );
 }
 
 /*

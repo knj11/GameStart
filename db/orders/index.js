@@ -8,6 +8,7 @@ module.exports = {
   ...require("./createCartStructure"),
   ...require("./getOrderBySessionId"),
   ...require("./getItemFromInventory"),
-  ...require('./addToOrderTotal'),
-  ...require("./addItemBackToInventory")
+  ...require("./addToOrderTotal"),
+  ...require("./addItemBackToInventory"),
+  ...require("./updateOrderStatusDb"),
 };

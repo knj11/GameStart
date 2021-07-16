@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 async function attachUser(req, res, next) {
   const prefix = "Bearer ";
 
+  console.log(req.headers);
   try {
     const { authorization: auth } = req.headers;
     if (!auth) {
@@ -16,7 +17,7 @@ async function attachUser(req, res, next) {
         const user = await getUserById(id);
 
         req.user = user;
-        console.log("User obj was attached to req")
+        console.log("User attached to req");
 
         next();
       }
