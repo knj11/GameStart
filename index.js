@@ -15,6 +15,7 @@ server.use(morgan("dev"));
 server.use(express.json());
 
 // API
+server.use(express.static('build'))
 server.use("/api", require("./routes"));
 
 //Error Handling
