@@ -108,9 +108,7 @@ const App = () => {
               </Grid>
 
               {isAdmin && (
-                <Fab className={classes.addButton} color="primary">
-                  <AddIcon />
-                </Fab>
+                <AddProduct setProducts={setProducts}/>
               )}
             </Route>
             <Route path="/cart">
