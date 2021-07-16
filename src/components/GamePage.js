@@ -9,11 +9,12 @@ const useStyles = makeStyles({
   gridContainer: {
     padding: "18px",
   },
-  cardHeight: {
+  cardgrid: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "400px",
+    width: "100%",
+    margin: "0 auto",
   },
   scroll: {
     //make sure to consider parent "contanter" when setting height. If larger the box wont scroll
@@ -78,21 +79,19 @@ const GamePage = ({ products, setProducts, sessionId }) => {
   const isAdmin = user.roleId === 1;
 
   return (
-    <>
-      {products &&
+    <Grid item xs={12} sm={6} md={4} className={classes.cardgrid}>
+      {isAdmin ? (
+        products &&
         products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card key={product.id} elevation={2} className={classes.cardHeight}>
-              {/*Break the cardActions into 2 components. 1 for Admin, one for standard user*/}
-              {isAdmin ? (
-                <AdminCardView setProducts={setProducts} product={product} />
-              ) : (
-                <UserCardView product={product} sessionId={sessionId} />
-              )}
-            </Card>
-          </Grid>
-        ))}
-    </>
+          <Card key={product.id} elevation={2} className={classes.cardHeight}>
+            {/*Break the cardActions into 2 components. 1 for Admin, one for standard user*/}
+            <AdminCardView setProducts={setProducts} product={product} />)
+          </Card>
+        ))
+      ) : (
+        <UserCardView products={products} sessionId={sessionId} />
+      )}
+    </Grid>
   );
 };
 

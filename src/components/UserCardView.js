@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
-import { CardActions, Button } from "@material-ui/core";
+import {
+  CardActions,
+  Button,
+  CardHeader,
+  CardContent,
+  Typography,
+} from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Card, Grid } from "@material-ui/core";
 import { ShoppingCartContext } from "./App";
 import { createCart, addItemToOrder, removeItemFromOrder } from "../api";
 import { CardDescription, EditCard } from "./";
@@ -61,6 +67,11 @@ const useStyles = makeStyles({
     color: "white",
     fontWeight: "bolder",
   },
+  gridStyle: {
+    width: "100%",
+    display: "flex",
+    flexFlow: "column",
+  },
 });
 
 //({ product, isAdmin, user, setProducts })
@@ -102,18 +113,21 @@ const UserCardView = ({ products, sessionId, user }) => {
     <>
       {products &&
         products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.inventoryId}>
-            <Card key={product.id} elevation={2} className={classes.cardHeight}>
-              <CardHeader
-                title={product.title + "-" + product.inventoryDescription}
-                subheader={product.unitPrice}
-              ></CardHeader>
-              <CardContent className={classes.scroll}>
-                <Typography>Description:</Typography>
-                <Typography>{product.description}</Typography>
-              </CardContent>
-              {/*Break the cardActions into 2 components. 1 for Admin, one for standard user. Below is Admin code*/}
-              {/*{(isAdmin) &&
+          <Card
+            key={product.inventoryId}
+            elevation={2}
+            className={classes.cardHeight}
+          >
+            <CardHeader
+              title={product.title + "-" + product.inventoryDescription}
+              subheader={product.unitPrice}
+            ></CardHeader>
+            <CardContent className={classes.scroll}>
+              <Typography>Description:</Typography>
+              <Typography>{product.description}</Typography>
+            </CardContent>
+            {/*Break the cardActions into 2 components. 1 for Admin, one for standard user. Below is Admin code*/}
+            {/*{(isAdmin) &&
           <CardActions style={{ "justifyContent": 'flex-end' }}>
             <IconButton style={{ color: 'red' }} onClick={handleDelete}>
               <DeleteForeverIcon />
@@ -123,42 +137,41 @@ const UserCardView = ({ products, sessionId, user }) => {
             </IconButton>
           </CardActions>
         }*/}
-              <CardActions className={classes.cardAction}>
-                <div className={classes.addShopingCartContainer}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ backgroundColor: "navy" }}
-                    onClick={() => handleAddToShoppingCart(product)}
-                  >
-                    <AddShoppingCartIcon
-                      className={classes.addShoppingCartIcon}
-                    />
+            <CardActions className={classes.cardAction}>
+              <div className={classes.addShopingCartContainer}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ backgroundColor: "navy" }}
+                  onClick={() => handleAddToShoppingCart(product)}
+                >
+                  <AddShoppingCartIcon
+                    className={classes.addShoppingCartIcon}
+                  />
 
-                    {"    " + getOrderCountForInvetory(product.inventoryId) >
-                    0 ? (
-                      <span className={classes.shoppingCartCountNotifier}>
-                        {getOrderCountForInvetory(product.inventoryId)}{" "}
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </Button>
-                </div>
-                <div className={classes.removeShopingCartContainer}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleRemoveFromShoppingCart(product)}
-                  >
-                    <RemoveShoppingCartIcon
-                      className={classes.removeShoppingCartIcon}
-                    />
-                  </Button>
-                </div>
-              </CardActions>
-            </Card>
-          </Grid>
+                  {"    " + getOrderCountForInvetory(product.inventoryId) >
+                  0 ? (
+                    <span className={classes.shoppingCartCountNotifier}>
+                      {getOrderCountForInvetory(product.inventoryId)}{" "}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </Button>
+              </div>
+              <div className={classes.removeShopingCartContainer}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleRemoveFromShoppingCart(product)}
+                >
+                  <RemoveShoppingCartIcon
+                    className={classes.removeShoppingCartIcon}
+                  />
+                </Button>
+              </div>
+            </CardActions>
+          </Card>
         ))}
     </>
   );

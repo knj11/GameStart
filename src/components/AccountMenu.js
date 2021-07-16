@@ -19,6 +19,7 @@ const AccountMenu = ({ setUser }) => {
     history.push("/");
   };
 
+  const isAdmin = user.roleId === 1;
   return (
     <>
       <IconButton

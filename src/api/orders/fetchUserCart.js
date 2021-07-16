@@ -8,7 +8,7 @@ export async function fetchUserCart({ user, sessionId }) {
     },
     {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${user?.token}`,
       },
     }
   );

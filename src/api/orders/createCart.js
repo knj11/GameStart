@@ -10,7 +10,7 @@ export async function createCart({
   orderDate,
   inventoryId,
 }) {
-  const header = user.token
+  const header = user?.token
     ? {
         headers: {
           Authorization: `Bearer ${user?.token}`,
