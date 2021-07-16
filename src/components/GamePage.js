@@ -10,7 +10,8 @@ const useStyles = makeStyles({
     padding: "18px",
   },
   cardgrid: {
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
     flexDirection: "column",
     justifyContent: "space-between",
     width: "100%",

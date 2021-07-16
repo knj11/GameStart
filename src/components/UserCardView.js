@@ -72,6 +72,12 @@ const useStyles = makeStyles({
     display: "flex",
     flexFlow: "column",
   },
+  cardStyle: {
+    display: "flex",
+    flexFlow: "column",
+    margin: "5px",
+    height: "400px",
+  },
 });
 
 //({ product, isAdmin, user, setProducts })
@@ -116,7 +122,7 @@ const UserCardView = ({ products, sessionId, user }) => {
           <Card
             key={product.inventoryId}
             elevation={2}
-            className={classes.cardHeight}
+            className={classes.cardStyle}
           >
             <CardHeader
               title={product.title + "-" + product.inventoryDescription}
