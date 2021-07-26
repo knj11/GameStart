@@ -2,6 +2,7 @@
 
 const express = require("express");
 const server = express();
+const path = require('path')
 
 require('dotenv').config()
 
@@ -14,8 +15,13 @@ server.use(morgan("dev"));
 
 server.use(express.json());
 
+//Serve static files
+server.use(express.static(path.join(__dirname, 'build')))
+server.get('/', (res, req, next) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
 // API
-server.use("/", express.static('build'))
 server.use("/api", require("./routes"));
 
 //Error Handling
