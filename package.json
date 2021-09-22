@@ -9,7 +9,8 @@
     "client:dev": "react-scripts start",
     "client:build": "react-scripts build",
     "launch:db": "sudo service postgresql start",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
