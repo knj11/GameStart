@@ -10,11 +10,10 @@ const useStyles = makeStyles({
     padding: "18px",
   },
   cardgrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr",
-    flexDirection: "column",
+    //display: "grid",
+    //gridTemplateColumns: repeat("auto-fit", minmax("300px", "1fr")), ///"1fr 1fr 1fr", flexDirection: "column",
     justifyContent: "space-between",
-    width: "100%",
+    width: "80%",
     margin: "0 auto",
   },
   scroll: {
@@ -71,6 +70,10 @@ const useStyles = makeStyles({
     backgroundColor: "red",
     padding: "2px",
   },
+  cardHeight: {
+    display: "flex",
+    flexFlow: "row",
+  },
 });
 
 const GamePage = ({ products, setProducts, sessionId }) => {
@@ -80,7 +83,15 @@ const GamePage = ({ products, setProducts, sessionId }) => {
   const isAdmin = user.roleId === 1;
 
   return (
-    <Grid item xs={12} sm={6} md={4} className={classes.cardgrid}>
+    <Grid
+      item
+      className={classes.cardgrid}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+        gridGap: "20px",
+      }}
+    >
       {isAdmin ? (
         products &&
         products.map((product) => (

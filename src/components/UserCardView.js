@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   cardAction: {
     display: "grid",
     gridTemplateColumns: "repeat(5,1fr)",
-    width: "99%",
+    width: "100%",
     padding: "2px",
     border: "1px solid blue",
     borderRadius: "4px",
@@ -76,7 +76,10 @@ const useStyles = makeStyles({
     display: "flex",
     flexFlow: "column",
     margin: "5px",
-    height: "400px",
+    justifyContent: "space-between",
+  },
+  scroll: {
+    flex: "1",
   },
 });
 

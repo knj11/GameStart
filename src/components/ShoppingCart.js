@@ -21,7 +21,6 @@ import {
   handleRemoveFromShoppingCartRemover,
 } from ".";
 import { createCart, addItemToOrder, removeItemFromOrder } from "../api";
-import gameImage from "../img/Marvels-Spider-Man-Miles-Morales-Ultimate-Edition.webp";
 
 import { AuthDialog, AccountMenu } from ".";
 
@@ -130,7 +129,10 @@ export default function ShoppingCart({ sessionId, user, setUser, setOpen }) {
               <TableRow key={sCI.product.inventoryId}>
                 <TableCell align="center" width="10rem">
                   <img
-                    src={gameImage}
+                    src={require(`${sCI.product.picture.replace(
+                      "src",
+                      "public"
+                    )}`)}
                     style={{ width: "10rem", margin: "0", padding: "0" }}
                   />
                 </TableCell>
