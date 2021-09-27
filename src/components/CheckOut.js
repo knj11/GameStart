@@ -142,6 +142,7 @@ const CheckOut = ({ user }) => {
               {shoppingCart?.Items?.map((sCI) => (
                 <TableRow key={sCI.product.inventoryId}>
                   <TableCell align="center" width="10rem">
+                    {console.log(gameImage)}
                     <img
                       src={gameImage}
                       style={{ width: "10rem", margin: "0", padding: "0" }}
