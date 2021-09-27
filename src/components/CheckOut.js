@@ -144,7 +144,7 @@ const CheckOut = ({ user }) => {
                   <TableCell align="center" width="10rem">
                     {console.log(gameImage)}
                     <img
-                      src={gameImage}
+                      src={"." + gameImage}
                       style={{ width: "10rem", margin: "0", padding: "0" }}
                     />
                   </TableCell>

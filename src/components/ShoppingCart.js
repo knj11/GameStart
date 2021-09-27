@@ -129,10 +129,7 @@ export default function ShoppingCart({ sessionId, user, setUser, setOpen }) {
               <TableRow key={sCI.product.inventoryId}>
                 <TableCell align="center" width="10rem">
                   <img
-                    src={require(`${sCI.product.picture.replace(
-                      "src",
-                      "public"
-                    )}`)}
+                    src={`${sCI.product.picture}`}
                     style={{ width: "10rem", margin: "0", padding: "0" }}
                   />
                 </TableCell>
